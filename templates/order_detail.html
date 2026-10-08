@@ -1,0 +1,250 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="order-detail-section">
+
+    <div class="order-detail-container">
+<div class="breadcrumb">
+    <a href="{% url 'home' %}">HOME</a>
+    <span>/</span>
+    <a href="{% url 'my_orders' %}">MY ORDERS</a>
+    <span>/</span>
+    <span>ORDER #{{ order.id }}</span>
+</div>
+        <!-- ================================= -->
+        <!-- ORDER HEADER -->
+        <!-- ================================= -->
+
+        <div class="order-detail-header">
+
+            <div class="order-heading">
+
+                <span class="order-label">
+                    YOUR ORDER
+                </span>
+
+                <h1>
+                    #{{ order.id }}
+                </h1>
+
+                <p>
+                    Placed on
+                    {{ order.created_at|date:"d M Y, h:i A" }}
+                </p>
+
+            </div>
+
+            <div class="detail-status">
+                {{ order.status }}
+            </div>
+
+        </div>
+
+
+        <!-- ================================= -->
+        <!-- ORDER ITEMS -->
+        <!-- ================================= -->
+
+        <div class="order-items-card">
+
+            <div class="order-items-header">
+
+                <div>
+                    <span class="purchase-label">
+                        YOUR PURCHASE
+                    </span>
+
+                    <h2>
+                        Order Items
+                    </h2>
+                </div>
+
+                <span class="items-count">
+                    {{ order.items.count }}
+                    {% if order.items.count == 1 %}
+                        item
+                    {% else %}
+                        items
+                    {% endif %}
+                </span>
+
+            </div>
+
+
+            {% for item in order.items.all %}
+
+            <div class="order-item">
+
+                <!-- PRODUCT IMAGE -->
+
+                <div class="order-item-image">
+
+                    {% if item.product and item.product.image %}
+
+                        <img
+                            src="{{ item.product.image.url }}"
+                            alt="{{ item.product_name }}"
+                        >
+
+                    {% else %}
+
+                        <div class="no-image">
+                            <i class="fa-solid fa-image"></i>
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+
+                <!-- PRODUCT INFORMATION -->
+
+                <div class="order-item-info">
+
+                    <h3>
+                        {{ item.product_name }}
+                    </h3>
+
+                    <div class="order-item-meta">
+
+                        <span>
+                            Quantity:
+                            <strong>{{ item.quantity }}</strong>
+                        </span>
+
+                        <span>
+                            Price:
+                            <strong>
+                                Rs. {{ item.price|floatformat:0 }}
+                            </strong>
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ITEM TOTAL -->
+
+                <div class="order-item-total">
+
+                    <span>
+                        Item Total
+                    </span>
+
+                    <strong>
+                        Rs. {{ item.total|floatformat:0 }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+            {% empty %}
+
+                <div class="no-products">
+
+                    <div class="no-products-icon">
+                        <i class="fa-solid fa-box-open"></i>
+                    </div>
+
+                    <h3>
+                        No products found
+                    </h3>
+
+                    <p>
+                        This order does not contain any items.
+                    </p>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+
+        <!-- ================================= -->
+        <!-- ORDER SUMMARY -->
+        <!-- ================================= -->
+
+        <div class="order-summary-card">
+
+            <h2>
+                Order Summary
+            </h2>
+
+            <div class="summary-row">
+
+                <span>
+                    Subtotal
+                </span>
+
+                <strong>
+                    Rs. {{ order.subtotal|floatformat:0 }}
+                </strong>
+
+            </div>
+
+            <div class="summary-row">
+
+                <span>
+                    Shipping
+                </span>
+
+                <strong>
+                    {% if order.shipping == 0 %}
+                        Free
+                    {% else %}
+                        Rs. {{ order.shipping|floatformat:0 }}
+                    {% endif %}
+                </strong>
+
+            </div>
+
+            <div class="summary-divider"></div>
+
+            <div class="summary-total">
+
+                <span>
+                    Order Total
+                </span>
+
+                <strong>
+                    Rs. {{ order.total|floatformat:0 }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================================= -->
+        <!-- ACTION BUTTONS -->
+        <!-- ================================= -->
+
+        <div class="order-actions">
+
+            <a
+                href="{% url 'my_orders' %}"
+                class="back-orders-btn"
+            >
+                <i class="fa-solid fa-arrow-left"></i>
+                Back to Orders
+            </a>
+
+            <a
+                href="{% url 'home' %}"
+                class="continue-shopping-btn"
+            >
+                Continue Shopping
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

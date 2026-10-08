@@ -1,0 +1,668 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}SHOPNEX{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+<!-- Product filter/sort CSS - load LAST -->
+<link rel="stylesheet" href="{% static 'css/product-filters.css' %}">
+
+    
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+</head>
+
+<body>
+<div class="sale-bar">
+    <div class="sale-bar-content">
+        <span>⚠️ FREE SHIPPING ON ORDERS ABOVE Rs.5000   </span>
+        <span>⚠️ FREE SHIPPING ON ORDERS ABOVE Rs.5000  </span>
+        <span>⚠️ FREE SHIPPING ON ORDERS ABOVE Rs.5000  </span>
+        <span>⚠️ FREE SHIPPING ON ORDERS ABOVE Rs.5000  </span>
+        <span>⚠️ FREE SHIPPING ON ORDERS ABOVE Rs.5000  </span>
+        <span>⚠️ FREE SHIPPING ON ORDERS ABOVE Rs.5000  </span>
+        <span>⚠️ FREE SHIPPING ON ORDERS ABOVE Rs.5000  </span>
+        <span>⚠️ FREE SHIPPING ON ORDERS ABOVE Rs.5000  </span>
+       
+    </div>
+</div>
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<nav class="navbar">
+
+    <!-- LOGO -->
+    <a href="{% url 'home' %}" class="navbar-logo">
+        SHOP<span>NEX</span>
+    </a>
+<!-- =====================================================
+     SHOPNEX HEADER ACTIONS
+===================================================== -->
+
+<div class="sx-header-actions">
+
+    <!-- SEARCH -->
+    <button
+        type="button"
+        class="sx-header-icon"
+        id="sxSearchButton"
+        aria-label="Search"
+    >
+        <i class="fa-solid fa-magnifying-glass"></i>
+    </button>
+
+
+    <!-- CART -->
+    <button
+        type="button"
+        class="sx-header-icon sx-cart-icon"
+        id="sxOpenCart"
+        aria-label="Cart"
+    >
+        <i class="fa-solid fa-cart-shopping"></i>
+
+        <span
+            class="sx-cart-badge"
+            id="sxHeaderCartCount"
+        >
+            0
+        </span>
+    </button>
+
+
+    <!-- HAMBURGER -->
+    <button
+        class="menu-toggle"
+        id="menuToggle"
+        type="button"
+        aria-label="Open menu"
+    >
+        <i class="fa-solid fa-bars"></i>
+    </button>
+
+
+    <!-- MENU -->
+    <div class="side-menu" id="sideMenu">
+
+        <!-- MENU HEADER -->
+        <div class="menu-header">
+
+            <div>
+                <span>SHOPNEX</span>
+                <h3>Menu</h3>
+            </div>
+
+            <button
+                class="menu-close"
+                id="menuClose"
+                type="button"
+            >
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+        </div>
+
+
+        <!-- MENU LINKS -->
+        <div class="menu-links">
+
+            <!-- HOME -->
+            <a href="{% url 'home' %}">
+                <i class="fa-solid fa-house"></i>
+                <span>Home</span>
+                <i class="fa-solid fa-chevron-right"></i>
+            </a>
+
+
+            <!-- PRODUCTS -->
+            <a href="{% url 'home' %}#products">
+                <i class="fa-solid fa-box"></i>
+                <span>Products</span>
+                <i class="fa-solid fa-chevron-right"></i>
+            </a>
+
+
+            <!-- WISHLIST -->
+            <a href="{% url 'wishlist' %}" class="menu-link-with-count">
+
+                <div class="menu-link-left">
+                    <i class="fa-regular fa-heart"></i>
+                    <span>Wishlist</span>
+                </div>
+
+                {% if wishlist_count %}
+                    <span class="menu-count wishlist-count">
+                        {{ wishlist_count }}
+                    </span>
+                {% endif %}
+
+                <i class="fa-solid fa-chevron-right"></i>
+
+            </a>
+
+
+            <!-- CART -->
+            <a href="{% url 'cart' %}" class="menu-link-with-count">
+
+                <div class="menu-link-left">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span>Cart</span>
+                </div>
+
+                {% if cart_count %}
+                    <span class="menu-count cart-count">
+                        {{ cart_count }}
+                    </span>
+                {% endif %}
+
+                <i class="fa-solid fa-chevron-right"></i>
+
+            </a>
+
+
+            <!-- MY ORDERS -->
+             {% if user.is_authenticated %}
+            <a href="{% url 'my_orders' %}">
+                <i class="fa-solid fa-box-open"></i>
+                <span>My Orders</span>
+                <i class="fa-solid fa-chevron-right"></i>
+            </a>
+
+{% else %}
+
+<a href="{% url 'track_order' %}">
+        Track Order 
+    </a>
+
+{% endif %}
+        </div>
+<!-- =========================================
+     THEME SWITCHER
+========================================= -->
+
+<div class="theme-switcher">
+
+    <div class="theme-info">
+
+        <div class="theme-icon">
+            <i class="fa-solid fa-moon" id="themeIcon"></i>
+        </div>
+
+        <div>
+            <span>Appearance</span>
+            <strong id="themeText">Dark Mode</strong>
+        </div>
+
+    </div>
+
+
+    <button
+        type="button"
+        class="theme-toggle"
+        id="themeToggle"
+        aria-label="Toggle dark and light mode"
+    >
+
+        <span class="theme-toggle-circle"></span>
+
+    </button>
+
+</div>
+
+        <!-- MENU FOOTER -->
+        <div class="menu-footer">
+
+            <div class="menu-user">
+                <div class="user-icon">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+{% if user.is_authenticated %}
+
+    <div class="user-info">
+        <span>Logged in as</span>
+        <strong>{{ user.username }}</strong>
+    </div>
+
+    <form method="POST" action="{% url 'logout' %}" class="logout-form">
+        {% csrf_token %}
+
+        <button type="submit" class="logout-btn">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            Logout
+        </button>
+    </form>
+
+{% else %}
+
+    <a href="{% url 'login' %}" class="login-btn">
+        <i class="fa-solid fa-right-to-bracket"></i>
+        Login
+    </a>
+ </div>
+
+    </div>
+{% endif %}
+
+       
+
+
+    <!-- OVERLAY -->
+    <div
+        class="menu-overlay"
+        id="menuOverlay"
+    ></div>
+<aside class="side-menu" id="sideMenu">
+
+    <!-- your menu content -->
+
+</aside>
+
+</nav>
+<!-- =====================================================
+     SEARCH PANEL
+===================================================== -->
+
+<!-- =====================================================
+     SEARCH PANEL
+===================================================== -->
+
+<div class="sx-search-panel" id="sxSearchPanel">
+
+    <form
+        method="GET"
+        action="{% url 'home' %}"
+        class="sx-search-form"
+        id="sxSearchForm"
+    >
+
+        <i class="fa-solid fa-magnifying-glass"></i>
+
+        <input
+            type="text"
+            name="search"
+            id="sxSearchInput"
+            placeholder="Search products..."
+            autocomplete="off"
+        >
+
+        <button
+            type="button"
+            id="sxCloseSearch"
+        >
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+    </form>
+{% if search %}
+    <a href="{% url 'home' %}" class="clear-search">
+        ✕ Clear Search
+    </a>
+{% endif %}
+    <div
+        class="sx-search-results"
+        id="sxSearchResults"
+        
+    ></div>
+
+</div>
+<!-- =====================================================
+     MOBILE MENU
+     
+     IMPORTANT:
+     ONLY HOME / PRODUCTS / AUTH
+     
+     NO CART
+     NO WISHLIST
+     NO USER NAME
+===================================================== -->
+
+
+<!-- =====================================================
+     CONTENT
+===================================================== -->
+
+<main>
+
+    {% block content %}
+    {% endblock %}
+
+</main>
+
+<!-- =========================================================
+     SHOPNEX FOOTER
+========================================================= -->
+
+<footer class="shopnex-footer">
+
+    <!-- ================= NEWSLETTER ================= -->
+
+    <div class="footer-newsletter">
+
+        <div class="newsletter-info">
+
+            <div class="newsletter-icon">
+                <i class="fa-regular fa-envelope"></i>
+            </div>
+
+            <div>
+                <span class="newsletter-label">
+                    STAY IN THE LOOP
+                </span>
+
+                <p>
+                    Get exclusive offers, new arrivals<br>
+                    and updates straight to your inbox.
+                </p>
+            </div>
+
+        </div>
+
+
+        <form
+            method="POST"
+            action="{% url 'newsletter_subscribe' %}"
+            class="footer-newsletter-form"
+        >
+
+            {% csrf_token %}
+
+            <input
+                type="email"
+                name="email"
+                placeholder="Enter your email"
+                required
+            >
+
+            <button type="submit">
+                SUBSCRIBE
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <!-- ================= FOOTER MAIN ================= -->
+
+    <div class="footer-main">
+
+
+        <!-- BRAND -->
+
+        <div class="footer-brand">
+
+            <a
+                href="{% url 'home' %}"
+                class="footer-logo"
+            >
+                SHOP<span>NEX</span>
+            </a>
+
+            <p>
+                Elevated shopping experience<br>
+                for everyone.
+            </p>
+
+
+            <!-- SOCIAL -->
+
+            <div class="footer-social">
+
+                <a
+                    href="#"
+                    aria-label="Instagram"
+                >
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+
+                <a
+                    href="#"
+                    aria-label="Facebook"
+                >
+                    <i class="fa-brands fa-facebook-f"></i>
+                </a>
+
+                <a
+                    href="#"
+                    aria-label="TikTok"
+                >
+                    <i class="fa-brands fa-tiktok"></i>
+                </a>
+
+                <a
+                    href="#"
+                    aria-label="YouTube"
+                >
+                    <i class="fa-brands fa-youtube"></i>
+                </a>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- SHOP -->
+
+        <div class="footer-column">
+
+            <h4>SHOP</h4>
+
+            <a href="{% url 'home' %}#products">
+                All Products
+            </a>
+
+            <a href="{% url 'home' %}#products">
+                New Arrivals
+            </a>
+
+            <a href="{% url 'home' %}#products">
+                Best Sellers
+            </a>
+
+            <a href="{% url 'home' %}#products">
+                Deals
+            </a>
+
+        </div>
+
+
+
+        <!-- HELP -->
+
+        <div class="footer-column">
+
+            <h4>HELP</h4>
+
+            <a href="{% url 'track_order' %}">
+                Track Order
+            </a>
+
+            <a href="{% url 'returns' %}">
+                Returns
+            </a>
+
+            <a href="{% url 'shipping_info' %}">
+                Shipping Info
+            </a>
+
+            <a href="{% url 'faqs' %}">
+                FAQs
+            </a>
+
+        </div>
+
+
+
+        <!-- COMPANY -->
+
+        <div class="footer-column">
+
+            <h4>COMPANY</h4>
+
+            <a href="{% url 'about' %}">
+                About Us
+            </a>
+
+            <a href="{% url 'contact' %}">
+                Contact Us
+            </a>
+
+            <a href="{% url 'privacy_policy' %}">
+                Privacy Policy
+            </a>
+
+            <a href="{% url 'terms' %}">
+                Terms & Conditions
+            </a>
+
+        </div>
+
+
+
+        <!-- PAYMENT -->
+
+        <div class="footer-payment">
+
+            <h4>WE ACCEPT</h4>
+
+            <div class="payment-methods">
+
+                <span>
+                    <i class="fa-brands fa-cc-visa"></i>
+                </span>
+
+                <span>
+                    <i class="fa-brands fa-cc-mastercard"></i>
+                </span>
+
+                <span class="payment-text">
+                    <i class="fa-solid fa-wallet"></i>
+                    <small>EasyPaisa</small>
+                </span>
+
+                <span class="payment-text">
+                    <i class="fa-solid fa-mobile-screen"></i>
+                    <small>JazzCash</small>
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================= FOOTER BOTTOM ================= -->
+
+    <div class="footer-bottom">
+
+        <p>
+            © {% now "Y" %} SHOPNEX. All rights reserved.
+        </p>
+
+        <p>
+            Designed by MUHAMMAD AHSAN SAEED with
+            <span class="heart">♥</span>
+            for a better shopping experience.
+        </p>
+
+    </div>
+
+</footer>
+<!-- =====================================================
+     SHOPNEX CART OVERLAY
+===================================================== -->
+
+<div class="sx-cart-overlay" id="sxCartOverlay"></div>
+
+
+<!-- =====================================================
+     SHOPNEX CART DRAWER
+===================================================== -->
+
+<aside class="sx-cart-drawer" id="sxCartDrawer">
+
+    <!-- HEADER -->
+    <div class="sx-cart-header">
+
+        <div>
+            <span>SHOPNEX</span>
+
+            <h3>
+                Your Cart
+                <small id="sxCartCount">(0)</small>
+            </h3>
+        </div>
+
+        <button
+            type="button"
+            id="sxCloseCart"
+            class="sx-cart-close"
+        >
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+    </div>
+
+
+    <!-- CART CONTENT -->
+
+    <div class="sx-cart-content" id="sxCartContent">
+
+        <div class="sx-cart-loading">
+
+            <i class="fa-solid fa-spinner fa-spin"></i>
+
+            <p>Loading cart...</p>
+
+        </div>
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <div class="sx-cart-footer" id="sxCartFooter">
+
+        <div class="sx-cart-total">
+
+            <span>Total</span>
+
+            <strong id="sxCartTotal">
+                
+                  
+            </strong>
+
+        </div>
+
+        <a
+            href="{% url 'cart' %}"
+            class="sx-view-cart-btn"
+        >
+            VIEW FULL CART
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
+
+    </div>
+
+</aside>
+
+
+
+
+<script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

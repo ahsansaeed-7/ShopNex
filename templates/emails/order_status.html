@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="color-scheme"
+        content="light"
+    >
+
+    <meta
+        name="supported-color-schemes"
+        content="light"
+    >
+
+    <title>ShopNex Order Update</title>
+
+</head>
+
+
+<body
+    style="
+        margin:0;
+        padding:0;
+        background:#f3f6fa;
+        font-family:Arial,Helvetica,sans-serif;
+        color:#172033;
+    "
+>
+
+
+<!-- =====================================================
+     OUTER WRAPPER
+===================================================== -->
+
+<table
+    width="100%"
+    cellpadding="0"
+    cellspacing="0"
+    border="0"
+    role="presentation"
+    style="
+        width:100%;
+        background:#f3f6fa;
+        margin:0;
+        padding:35px 12px;
+    "
+>
+
+<tr>
+
+<td align="center">
+
+
+<!-- =====================================================
+     MAIN CONTAINER
+===================================================== -->
+
+<table
+    width="620"
+    cellpadding="0"
+    cellspacing="0"
+    border="0"
+    role="presentation"
+    style="
+        width:100%;
+        max-width:620px;
+        background:#ffffff;
+        border-radius:18px;
+        overflow:hidden;
+        box-shadow:0 10px 35px rgba(17,24,39,0.08);
+    "
+>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<tr>
+
+<td
+    align="center"
+    style="
+        background:#050914;
+        padding:32px 25px;
+    "
+>
+
+<div
+    style="
+        color:#ffffff;
+        font-size:30px;
+        line-height:36px;
+        font-weight:800;
+        letter-spacing:-1px;
+    "
+>
+    SHOP<span style="color:#1683ff;">NEX</span>
+</div>
+
+
+<div
+    style="
+        margin-top:8px;
+        color:#94a3b8;
+        font-size:11px;
+        line-height:16px;
+        letter-spacing:2px;
+    "
+>
+    ORDER UPDATE
+</div>
+
+</td>
+
+</tr>
+
+
+<!-- =====================================================
+     STATUS
+===================================================== -->
+
+<tr>
+
+<td
+    align="center"
+    style="
+        padding:40px 30px 25px;
+    "
+>
+
+
+<!-- STATUS ICON -->
+
+<table
+    width="76"
+    height="76"
+    cellpadding="0"
+    cellspacing="0"
+    border="0"
+    role="presentation"
+    style="
+        width:76px;
+        height:76px;
+        margin:0 auto 20px;
+    "
+>
+
+<tr>
+
+<td
+    align="center"
+    valign="middle"
+    style="
+        width:76px;
+        height:76px;
+        border-radius:50%;
+        background:{{ status_bg|default:'#eff6ff' }};
+        color:{{ status_color|default:'#1683ff' }};
+        font-size:32px;
+        font-weight:bold;
+    "
+>
+
+{{ status_icon|default:"✓" }}
+
+</td>
+
+</tr>
+
+</table>
+
+
+<!-- STATUS TITLE -->
+
+<h1
+    style="
+        margin:0;
+        color:#111827;
+        font-size:26px;
+        line-height:34px;
+        font-weight:700;
+    "
+>
+
+{{ status_title|default:"Order Updated" }}
+
+</h1>
+
+
+<!-- STATUS MESSAGE -->
+
+<p
+    style="
+        margin:12px auto 0;
+        max-width:480px;
+        color:#64748b;
+        font-size:15px;
+        line-height:24px;
+    "
+>
+
+{{ status_message|default:"Your ShopNex order has been updated." }}
+
+</p>
+
+</td>
+
+</tr>
+
+
+<!-- =====================================================
+     ORDER SUMMARY
+===================================================== -->
+
+<tr>
+
+<td
+    style="
+        padding:5px 30px 30px;
+    "
+>
+
+
+<table
+    width="100%"
+    cellpadding="0"
+    cellspacing="0"
+    border="0"
+    role="presentation"
+    style="
+        background:#f8fafc;
+        border:1px solid #e5eaf0;
+        border-radius:14px;
+    "
+>
+
+<tr>
+
+
+<!-- ORDER NUMBER -->
+
+<td
+    width="50%"
+    valign="top"
+    style="
+        padding:22px;
+    "
+>
+
+<div
+    style="
+        color:#94a3b8;
+        font-size:11px;
+        line-height:16px;
+        text-transform:uppercase;
+        letter-spacing:1px;
+    "
+>
+    Order Number
+</div>
+
+
+<div
+    style="
+        margin-top:6px;
+        color:#111827;
+        font-size:20px;
+        line-height:28px;
+        font-weight:700;
+    "
+>
+
+#{{ order.id }}
+
+</div>
+
+</td>
+
+
+<!-- TOTAL -->
+
+<td
+    width="50%"
+    align="right"
+    valign="top"
+    style="
+        padding:22px;
+    "
+>
+
+<div
+    style="
+        color:#94a3b8;
+        font-size:11px;
+        line-height:16px;
+        text-transform:uppercase;
+        letter-spacing:1px;
+    "
+>
+    Order Total
+</div>
+
+
+<div
+    style="
+        margin-top:6px;
+        color:#1683ff;
+        font-size:20px;
+        line-height:28px;
+        font-weight:700;
+    "
+>
+
+Rs. {{ order.total }}
+
+</div>
+
+</td>
+
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+
+<!-- =====================================================
+     STATUS CHANGE
+===================================================== -->
+
+<tr>
+
+<td
+    style="
+        padding:0 30px 30px;
+    "
+>
+
+
+<table
+    width="100%"
+    cellpadding="0"
+    cellspacing="0"
+    border="0"
+    role="presentation"
+    style="
+        border:1px solid #e5e7eb;
+        border-radius:14px;
+    "
+>
+
+
+<tr>
+
+
+<td
+    width="50%"
+    style="
+        padding:17px 20px;
+        border-right:1px solid #e5e7eb;
+    "
+>
+
+<div
+    style="
+        color:#94a3b8;
+        font-size:11px;
+        text-transform:uppercase;
+        letter-spacing:1px;
+    "
+>
+    Previous Status
+</div>
+
+
+<div
+    style="
+        margin-top:7px;
+        color:#475569;
+        font-size:14px;
+        font-weight:600;
+    "
+>
+
+{{ old_status|default:"New Order" }}
+
+</div>
+
+</td>
+
+
+<td
+    width="50%"
+    style="
+        padding:17px 20px;
+    "
+>
+
+<div
+    style="
+        color:#94a3b8;
+        font-size:11px;
+        text-transform:uppercase;
+        letter-spacing:1px;
+    "
+>
+    Current Status
+</div>
+
+
+<div
+    style="
+        margin-top:7px;
+        color:{{ status_color|default:'#1683ff' }};
+        font-size:14px;
+        font-weight:700;
+    "
+>
+
+{{ new_status|default:order.status }}
+
+</div>
+
+</td>
+
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+
+<!-- =====================================================
+     ORDER PROGRESS
+===================================================== -->
+
+{% if new_status != "Cancelled" %}
+
+<tr>
+
+<td
+    style="
+        padding:0 30px 35px;
+    "
+>
+
+
+<h2
+    style="
+        margin:0 0 22px;
+        color:#172033;
+        font-size:17px;
+        line-height:24px;
+        font-weight:700;
+    "
+>
+
+Order Progress
+
+</h2>
+
+
+<!-- PROGRESS TABLE -->
+
+<table
+    width="100%"
+    cellpadding="0"
+    cellspacing="0"
+    border="0"
+    role="presentation"
+>
+
+<tr>
+
+
+<!-- PENDING -->
+
+<td
+    align="center"
+    width="20%"
+>
+
+<table
+    width="34"
+    height="34"
+    cellpadding="0"
+    cellspacing="0"
+    border="0"
+    role="presentation"
+    style="margin:auto;"
+>
+
+<tr>
+
+<td
+    align="center"
+    valign="middle"
+    style="
+        width:34px;
+        height:34px;
+        border-radius:50%;
+        background:{% if progress >= 1 %}#1683ff{% else %}#e5e7eb{% endif %};
+        color:#ffffff;
+        font-size:13px;
+        font-weight:bold;
+    "
+>
+
+{% if progress >= 1 %}✓{% else %}1{% endif %}
+
+</td>
+
+</tr>
+
+</table>
+
+
+<div
+    style="
+        margin-top:8px;
+        color:#64748b;
+        font-size:10px;
+        line-height:14px;
+    "
+>
+    Pending
+</div>
+
+</td>
+
+
+<!-- CONFIRMED -->
+
+<td
+    align="center"
+    width="20%"
+>
+
+<table
+    width="34"
+    height="34"
+    cellpadding="0"
+    cellspacing="0"
+    border="0"
+    role="presentation"
+    style="margin:auto;"
+>
+
+<tr>
+
+<td
+    align="center"
+    valign="middle"
+    style="
+        width:34px;
+        height:34px;
+        border-radius:50%;
+        background:{% if progress >= 2 %}#1683ff{% else %}#e5e7eb{% endif %};
+        color:#ffffff;
+        font-size:13px;
+        font-weight:bold;
+    "
+>
+
+{% if progress >= 2 %}✓{% else %}2{% endif %}
+
+</td>
+
+</tr>
+
+</table>
+
+
+<div
+    style="
+        margin-top:8px;
+        color:#64748b;
+        font-size:10px;
+        line-height:14px;
+    "
+>
+    Confirmed
+</div>
+
+</td>
+
+
+<!-- PROCESSING -->
+
+<td
+    align="center"
+    width="20%"
+>
+
+<table
+    width="34"
+    height="34"
+    cellpadding="0"
+    cellspacing="0"
+    border="0"
+    role="presentation"
+    style="margin:auto;"
+>
+
+<tr>
+
+<td
+    align="center"
+    valign="middle"
+    style="
+        width:34px;
+        height:34px;
+        border-radius:50%;
+        background:{% if progress >= 3 %}#1683ff{% else %}#e5e7eb{% endif %};
+        color:#ffffff;
+        font-size:13px;
+        font-weight:bold;
+    "
+>
+
+{% if progress >= 3 %}✓{% else %}3{% endif %}
+
+</td>
+
+</tr>
+
+</table>
+
+
+<div
+    style="
+        margin-top:8px;
+        color:#64748b;
+        font-size:10px;
+        line-height:14px;
+    "
+>
+    Processing
+</div>
+
+</td>
+
+
+<!-- SHIPPED -->
+
+<td
+    align="center"
+    width="20%"
+>
+
+<table
+    width="34"
+    height="34"
+    cellpadding="0"
+    cellspacing="0"
+    border="0"
+    role="presentation"
+    style="margin:auto;"
+>
+
+<tr>
+
+<td
+    align="center"
+    valign="middle"
+    style="
+        width:34px;
+        height:34px;
+        border-radius:50%;
+        background:{% if progress >= 4 %}#1683ff{% else %}#e5e7eb{% endif %};
+        color:#ffffff;
+        font-size:13px;
+        font-weight:bold;
+    "
+>
+
+{% if progress >= 4 %}✓{% else %}4{% endif %}
+
+</td>
+
+</tr>
+
+</table>
+
+
+<div
+    style="
+        margin-top:8px;
+        color:#64748b;
+        font-size:10px;
+        line-height:14px;
+    "
+>
+    Shipped
+</div>
+
+</td>
+
+
+<!-- DELIVERED -->
+
+<td
+    align="center"
+    width="20%"
+>
+
+<table
+    width="34"
+    height="34"
+    cellpadding="0"
+    cellspacing="0"
+    border="0"
+    role="presentation"
+    style="margin:auto;"
+>
+
+<tr>
+
+<td
+    align="center"
+    valign="middle"
+    style="
+        width:34px;
+        height:34px;
+        border-radius:50%;
+        background:{% if progress >= 5 %}#16a34a{% else %}#e5e7eb{% endif %};
+        color:#ffffff;
+        font-size:13px;
+        font-weight:bold;
+    "
+>
+
+{% if progress >= 5 %}✓{% else %}5{% endif %}
+
+</td>
+
+</tr>
+
+</table>
+
+
+<div
+    style="
+        margin-top:8px;
+        color:#64748b;
+        font-size:10px;
+        line-height:14px;
+    "
+>
+    Delivered
+</div>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+{% endif %}
+
+
+<!-- =====================================================
+     CANCELLED
+===================================================== -->
+
+{% if new_status == "Cancelled" %}
+
+<tr>
+
+<td
+    style="
+        padding:0 30px 30px;
+    "
+>
+
+<table
+    width="100%"
+    cellpadding="0"
+    cellspacing="0"
+    border="0"
+    role="presentation"
+    style="
+        background:#fff7f7;
+        border:1px solid #fecaca;
+        border-radius:14px;
+    "
+>
+
+<tr>
+
+<td
+    style="
+        padding:20px;
+        border-left:4px solid #dc2626;
+    "
+>
+
+<div
+    style="
+        color:#991b1b;
+        font-size:15px;
+        font-weight:700;
+    "
+>
+    Order Cancelled
+</div>
+
+
+<div
+    style="
+        margin-top:7px;
+        color:#7f1d1d;
+        font-size:13px;
+        line-height:21px;
+    "
+>
+
+Your order is no longer being processed.
+
+</div>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+{% endif %}
+
+
+<!-- =====================================================
+     CUSTOMER MESSAGE
+===================================================== -->
+
+<tr>
+
+<td
+    style="
+        padding:0 30px 30px;
+    "
+>
+
+
+<table
+    width="100%"
+    cellpadding="0"
+    cellspacing="0"
+    border="0"
+    role="presentation"
+    style="
+        background:#f4f8ff;
+        border-radius:12px;
+    "
+>
+
+<tr>
+
+<td
+    style="
+        padding:20px;
+        border-left:4px solid #1683ff;
+    "
+>
+
+<div
+    style="
+        color:#334155;
+        font-size:14px;
+        line-height:23px;
+    "
+>
+
+Hello
+<strong>{{ order.full_name }}</strong> 👋
+
+<br><br>
+
+{{ customer_message|default:status_message }}
+
+</div>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+
+<!-- =====================================================
+     DELIVERY INFORMATION
+===================================================== -->
+
+<tr>
+
+<td
+    style="
+        padding:0 30px 30px;
+    "
+>
+
+
+<h2
+    style="
+        margin:0 0 15px;
+        color:#172033;
+        font-size:17px;
+        line-height:24px;
+    "
+>
+
+Delivery Information
+
+</h2>
+
+
+<table
+    width="100%"
+    cellpadding="0"
+    cellspacing="0"
+    border="0"
+    role="presentation"
+    style="
+        border:1px solid #e5e7eb;
+        border-radius:12px;
+    "
+>
+
+
+<tr>
+
+<td
+    style="
+        padding:14px 18px;
+        color:#94a3b8;
+        font-size:12px;
+        width:35%;
+    "
+>
+Name
+</td>
+
+<td
+    style="
+        padding:14px 18px;
+        color:#172033;
+        font-size:13px;
+        font-weight:600;
+    "
+>
+
+{{ order.full_name }}
+
+</td>
+
+</tr>
+
+
+<tr>
+
+<td
+    style="
+        padding:14px 18px;
+        color:#94a3b8;
+        font-size:12px;
+        border-top:1px solid #eef0f3;
+    "
+>
+Phone
+</td>
+
+<td
+    style="
+        padding:14px 18px;
+        color:#172033;
+        font-size:13px;
+        border-top:1px solid #eef0f3;
+    "
+>
+
+{{ order.phone }}
+
+</td>
+
+</tr>
+
+
+<tr>
+
+<td
+    style="
+        padding:14px 18px;
+        color:#94a3b8;
+        font-size:12px;
+        border-top:1px solid #eef0f3;
+    "
+>
+Address
+</td>
+
+<td
+    style="
+        padding:14px 18px;
+        color:#172033;
+        font-size:13px;
+        line-height:20px;
+        border-top:1px solid #eef0f3;
+    "
+>
+
+{{ order.address }}
+
+</td>
+
+</tr>
+
+
+<tr>
+
+<td
+    style="
+        padding:14px 18px;
+        color:#94a3b8;
+        font-size:12px;
+        border-top:1px solid #eef0f3;
+    "
+>
+City
+</td>
+
+<td
+    style="
+        padding:14px 18px;
+        color:#172033;
+        font-size:13px;
+        border-top:1px solid #eef0f3;
+    "
+>
+
+{{ order.city }}
+
+</td>
+
+</tr>
+
+
+<tr>
+
+<td
+    style="
+        padding:14px 18px;
+        color:#94a3b8;
+        font-size:12px;
+        border-top:1px solid #eef0f3;
+    "
+>
+Postal Code
+</td>
+
+<td
+    style="
+        padding:14px 18px;
+        color:#172033;
+        font-size:13px;
+        border-top:1px solid #eef0f3;
+    "
+>
+
+{{ order.postal_code }}
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+
+<!-- =====================================================
+     PAYMENT
+===================================================== -->
+
+<tr>
+
+<td
+    style="
+        padding:0 30px 30px;
+    "
+>
+
+
+<table
+    width="100%"
+    cellpadding="0"
+    cellspacing="0"
+    border="0"
+    role="presentation"
+    style="
+        background:#fafafa;
+        border-radius:12px;
+    "
+>
+
+<tr>
+
+<td
+    style="
+        padding:17px 20px;
+        color:#64748b;
+        font-size:13px;
+    "
+>
+
+Payment Method
+
+</td>
+
+
+<td
+    align="right"
+    style="
+        padding:17px 20px;
+        color:#172033;
+        font-size:13px;
+        font-weight:700;
+    "
+>
+
+{{ order.get_payment_method_display }}
+
+</td>
+
+</tr>
+
+
+<tr>
+
+<td
+    style="
+        padding:0 20px 17px;
+        color:#64748b;
+        font-size:13px;
+    "
+>
+
+Payment Status
+
+</td>
+
+
+<td
+    align="right"
+    style="
+        padding:0 20px 17px;
+        color:#172033;
+        font-size:13px;
+        font-weight:700;
+    "
+>
+
+{{ order.get_payment_status_display }}
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+
+<!-- =====================================================
+     VIEW ORDER BUTTON
+===================================================== -->
+
+{% if order_url %}
+
+<tr>
+
+<td
+    align="center"
+    style="
+        padding:0 30px 35px;
+    "
+>
+
+
+<a
+    href="{{ order_url }}"
+    style="
+        display:inline-block;
+        background:#1683ff;
+        color:#ffffff;
+        text-decoration:none;
+        font-size:15px;
+        line-height:20px;
+        font-weight:700;
+        padding:14px 30px;
+        border-radius:9px;
+    "
+>
+
+View My Order &nbsp; →
+
+</a>
+
+</td>
+
+</tr>
+
+{% endif %}
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<tr>
+
+<td
+    align="center"
+    style="
+        background:#050914;
+        padding:28px 25px;
+    "
+>
+
+
+<div
+    style="
+        color:#ffffff;
+        font-size:18px;
+        font-weight:700;
+    "
+>
+
+SHOP<span style="color:#1683ff;">NEX</span>
+
+</div>
+
+
+<p
+    style="
+        margin:9px 0 0;
+        color:#7f8ba0;
+        font-size:12px;
+        line-height:20px;
+    "
+>
+
+Thank you for shopping with ShopNex.
+
+<br>
+
+We appreciate your business.
+
+</p>
+
+
+<p
+    style="
+        margin:15px 0 0;
+        color:#64748b;
+        font-size:10px;
+        line-height:16px;
+    "
+>
+
+This is an automated email. Please do not reply to this message.
+
+</p>
+
+</td>
+
+</tr>
+
+
+</table>
+
+<!-- END MAIN CONTAINER -->
+
+
+</td>
+
+</tr>
+
+</table>
+
+<!-- END OUTER WRAPPER -->
+
+
+</body>
+
+</html>

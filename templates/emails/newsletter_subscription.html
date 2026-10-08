@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New ShopNex Subscriber</title>
+</head>
+
+<body style="
+    margin:0;
+    padding:0;
+    background:#05070d;
+    font-family:Arial,Helvetica,sans-serif;
+    color:#ffffff;
+">
+
+<table width="100%" cellpadding="0" cellspacing="0" border="0"
+       style="background:#05070d;padding:35px 15px;">
+
+```
+<tr>
+    <td align="center">
+
+        <!-- MAIN CARD -->
+
+        <table width="100%" cellpadding="0" cellspacing="0" border="0"
+               style="
+               max-width:600px;
+               background:#0c1220;
+               border:1px solid #1d2a42;
+               border-radius:18px;
+               overflow:hidden;
+               ">
+
+            <!-- HEADER -->
+
+            <tr>
+                <td style="
+                    padding:30px 35px;
+                    text-align:center;
+                    background:
+                    linear-gradient(
+                        135deg,
+                        #aab0bb,
+                        #0a101c
+                    );
+                    border-bottom:1px solid #1d2a42;
+                ">
+
+                    <div style="
+                        font-size:27px;
+                        font-weight:800;
+                        letter-spacing:-0.5px;
+                    ">
+                        <span style="color:#ffffff;">
+                            Shop
+                        </span><span style="color:#3b82f6;">
+                            Nex
+                        </span>
+                    </div>
+
+                    <div style="
+                        margin-top:8px;
+                        color:#71819b;
+                        font-size:11px;
+                        letter-spacing:2px;
+                        text-transform:uppercase;
+                    ">
+                        Newsletter Notification
+                    </div>
+
+                </td>
+            </tr>
+
+
+            <!-- ICON -->
+
+            <tr>
+                <td align="center" style="padding:35px 30px 15px;">
+
+                    <div style="
+                        width:65px;
+                        height:65px;
+                        line-height:65px;
+                        margin:auto;
+                        border-radius:50%;
+                        background:#10284c;
+                        color:#60a5fa;
+                        font-size:28px;
+                    ">
+                        ✉
+                    </div>
+
+                </td>
+            </tr>
+
+
+            <!-- TITLE -->
+
+            <tr>
+                <td style="
+                    padding:10px 35px 0;
+                    text-align:center;
+                ">
+
+                    <h1 style="
+                        margin:0;
+                        color:#ffffff;
+                        font-size:25px;
+                        line-height:1.3;
+                    ">
+                        New Newsletter Subscriber
+                    </h1>
+
+                    <p style="
+                        margin:12px 0 0;
+                        color:#8999b1;
+                        font-size:14px;
+                        line-height:1.7;
+                    ">
+                        Someone has just subscribed to the
+                        ShopNex newsletter.
+                    </p>
+
+                </td>
+            </tr>
+
+
+            <!-- SUBSCRIBER CARD -->
+
+            <tr>
+                <td style="padding:30px 35px;">
+
+                    <table width="100%" cellpadding="0" cellspacing="0"
+                           style="
+                           background:#080e19;
+                           border:1px solid #1b2940;
+                           border-radius:12px;
+                           ">
+
+                        <tr>
+                            <td style="
+                                padding:20px;
+                            ">
+
+                                <div style="
+                                    color:#65758d;
+                                    font-size:10px;
+                                    font-weight:bold;
+                                    letter-spacing:1.5px;
+                                    text-transform:uppercase;
+                                    margin-bottom:8px;
+                                ">
+                                    Subscriber Email
+                                </div>
+
+                                <div style="
+                                    color:#ffffff;
+                                    font-size:16px;
+                                    font-weight:600;
+                                    word-break:break-word;
+                                ">
+                                    {{ subscriber_email }}
+                                </div>
+
+                            </td>
+                        </tr>
+
+                    </table>
+
+                </td>
+            </tr>
+
+
+            <!-- INFORMATION -->
+
+            <tr>
+                <td style="padding:0 35px 30px;">
+
+                    <table width="100%" cellpadding="0" cellspacing="0">
+
+                        <tr>
+
+                            <td style="
+                                padding:12px 0;
+                                border-bottom:1px solid #172238;
+                            ">
+
+                                <span style="
+                                    color:#687993;
+                                    font-size:12px;
+                                ">
+                                    Subscriber ID
+                                </span>
+
+                                <span style="
+                                    float:right;
+                                    color:#ffffff;
+                                    font-size:12px;
+                                    font-weight:600;
+                                ">
+                                    #{{ subscriber.id }}
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td style="
+                                padding:12px 0;
+                            ">
+
+                                <span style="
+                                    color:#687993;
+                                    font-size:12px;
+                                ">
+                                    Subscribed
+                                </span>
+
+                                <span style="
+                                    float:right;
+                                    color:#ffffff;
+                                    font-size:12px;
+                                ">
+                                    {{ subscriber.subscribed_at|date:"d M Y, h:i A" }}
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+                    </table>
+
+                </td>
+            </tr>
+
+
+            <!-- FOOTER MESSAGE -->
+
+            <tr>
+                <td style="
+                    padding:22px 35px;
+                    background:#080d17;
+                    border-top:1px solid #172238;
+                    text-align:center;
+                ">
+
+                    <p style="
+                        margin:0;
+                        color:#687993;
+                        font-size:11px;
+                        line-height:1.6;
+                    ">
+                        This is an automated notification from
+                        your ShopNex website.
+                    </p>
+
+                    <p style="
+                        margin:8px 0 0;
+                        color:#3b82f6;
+                        font-size:11px;
+                        font-weight:bold;
+                    ">
+                        ShopNex Admin
+                    </p>
+
+                </td>
+            </tr>
+
+        </table>
+
+    </td>
+</tr>
+```
+
+</table>
+
+</body>
+</html>

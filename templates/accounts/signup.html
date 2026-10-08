@@ -1,0 +1,340 @@
+
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Create Account | SHOPNEX</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet"
+          href="{% static 'css/auth.css' %}">
+
+</head>
+
+<body>
+
+<div class="auth-page">
+
+
+    <!-- LEFT VISUAL -->
+    <div class="auth-visual">
+
+        <div class="visual-overlay"></div>
+
+        <div class="visual-content">
+
+            <a href="{% url 'home' %}" class="visual-logo">
+                SHOP<span>NEX</span>
+            </a>
+
+            <div class="visual-text">
+
+                <span class="visual-small">
+                    JOIN SHOPNEX
+                </span>
+
+                <h1>
+                    Start your<br>
+                    journey.
+                </h1>
+
+                <p>
+                    Create your ShopNex account and discover
+                    a smarter, more elegant way to shop.
+                </p>
+
+            </div>
+
+            <div class="visual-bottom">
+
+                <span>
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    Exclusive collections
+                </span>
+
+                <span>
+                    <i class="fa-solid fa-heart"></i>
+                    Save your favorites
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- SIGNUP FORM -->
+    <div class="auth-form-area">
+
+        <div class="auth-form-container">
+
+
+            <div class="mobile-logo">
+                SHOP<span>NEX</span>
+            </div>
+
+
+            <div class="form-heading">
+
+                <span class="heading-label">
+                    CREATE ACCOUNT
+                </span>
+
+                <h2>
+                    Join ShopNex
+                </h2>
+
+                <p>
+                    Create your account and start shopping.
+                </p>
+
+            </div>
+
+
+            {% if messages %}
+
+                <div class="auth-messages">
+
+                    {% for message in messages %}
+
+                        <div class="auth-message">
+                            {{ message }}
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% endif %}
+
+
+            <form method="POST" class="auth-form">
+
+                {% csrf_token %}
+
+
+                <!-- USERNAME -->
+                <div class="input-group">
+
+                    <label for="username">
+                        Username
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <i class="fa-regular fa-user"></i>
+
+                        <input
+                            type="text"
+                            id="username"
+                            name="username"
+                            placeholder="Choose a username"
+                            autocomplete="username"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- EMAIL -->
+                <div class="input-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <i class="fa-regular fa-envelope"></i>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Enter your email"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- PASSWORD -->
+                <div class="input-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <i class="fa-solid fa-lock"></i>
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Create a password"
+                            autocomplete="new-password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            onclick="togglePassword('password', this)"
+                        >
+
+                            <i class="fa-regular fa-eye"></i>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CONFIRM PASSWORD -->
+                <div class="input-group">
+
+                    <label for="password2">
+                        Confirm Password
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <i class="fa-solid fa-shield-halved"></i>
+
+                        <input
+                            type="password"
+                            id="password2"
+                            name="password2"
+                            placeholder="Confirm your password"
+                            autocomplete="new-password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            onclick="togglePassword('password2', this)"
+                        >
+
+                            <i class="fa-regular fa-eye"></i>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- TERMS -->
+                <label class="remember-row terms-row">
+
+                    <input
+                        type="checkbox"
+                        required
+                    >
+
+                    <span>
+                        I agree to the
+                        <a href="#">Terms & Conditions</a>
+                    </span>
+
+                </label>
+
+
+                <!-- CREATE -->
+                <button type="submit" class="auth-submit">
+
+                    <span>
+                        Create Account
+                    </span>
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </button>
+
+            </form>
+
+
+            <div class="auth-divider">
+                <span>OR</span>
+            </div>
+
+
+            <!-- LOGIN -->
+            <div class="auth-switch">
+
+                <span>
+                    Already have an account?
+                </span>
+
+                <a href="{% url 'login' %}">
+                    Sign In
+                </a>
+
+            </div>
+
+
+            <div class="auth-footer">
+
+                <a href="{% url 'home' %}">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Back to Shop
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function togglePassword(inputId, button) {
+
+    const input = document.getElementById(inputId);
+    const icon = button.querySelector("i");
+
+    if (input.type === "password") {
+
+        input.type = "text";
+
+        icon.classList.remove("fa-eye");
+        icon.classList.add("fa-eye-slash");
+
+    } else {
+
+        input.type = "password";
+
+        icon.classList.remove("fa-eye-slash");
+        icon.classList.add("fa-eye");
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>

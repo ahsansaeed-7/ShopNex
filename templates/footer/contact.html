@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="footer-page">
+
+    <div class="footer-page-container">
+
+        <span class="footer-page-label">
+            GET IN TOUCH
+        </span>
+
+        <h1>
+            Contact <span>ShopNex</span>
+        </h1>
+
+        <p>
+            Have a question about an order, product or
+            anything else? Send us a message and our team
+            will get back to you.
+        </p>
+
+
+        <form
+            method="POST"
+            class="contact-form"
+        >
+
+            {% csrf_token %}
+
+
+            <div class="contact-field">
+
+                <label>
+                    Your Name
+                </label>
+
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="Enter your name"
+                    required
+                >
+
+            </div>
+
+
+            <div class="contact-field">
+
+                <label>
+                    Email Address
+                </label>
+
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    required
+                >
+
+            </div>
+
+
+            <div class="contact-field full">
+
+                <label>
+                    Subject
+                </label>
+
+                <input
+                    type="text"
+                    name="subject"
+                    placeholder="How can we help?"
+                >
+
+            </div>
+
+
+            <div class="contact-field full">
+
+                <label>
+                    Message
+                </label>
+
+                <textarea
+                    name="message"
+                    placeholder="Write your message..."
+                    required
+                ></textarea>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="contact-submit"
+            >
+
+                Send Message
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </button>
+
+        </form>
+
+
+        <div class="contact-info">
+
+
+            <div class="contact-info-card">
+
+                <i class="fa-regular fa-envelope"></i>
+
+                <h4>
+                    Email
+                </h4>
+
+                <p>
+    shopnex13@gmail.com
+</p>
+
+            </div>
+
+
+            <div class="contact-info-card">
+
+                <i class="fa-solid fa-headset"></i>
+
+                <h4>
+                    Support
+                </h4>
+
+                <p>
+                    We're here to help with your orders.
+                </p>
+
+            </div>
+
+
+            <div class="contact-info-card">
+
+                <i class="fa-solid fa-clock"></i>
+
+                <h4>
+                    Response Time
+                </h4>
+
+                <p>
+                    Usually within 24 hours.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

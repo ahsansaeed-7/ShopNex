@@ -1,0 +1,412 @@
+/* =========================================
+   SHOPNEX - TRACK ORDER PAGE
+   Dark Premium Theme
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #02050c;
+    color: #ffffff;
+    min-height: 100vh;
+}
+
+
+/* =========================================
+   MAIN CONTAINER
+========================================= */
+
+.tracking-container {
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 40px 20px;
+
+    background:
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(35, 103, 255, 0.16),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 85% 80%,
+            rgba(35, 103, 255, 0.10),
+            transparent 35%
+        ),
+        #02050c;
+}
+
+
+/* =========================================
+   TRACKING CARD
+========================================= */
+
+.tracking-card {
+    width: 100%;
+    max-width: 560px;
+
+    padding: 50px 48px;
+
+    background: rgba(7, 12, 24, 0.94);
+
+    border: 1px solid #18243a;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 25px 80px rgba(0, 0, 0, 0.55),
+        0 0 40px rgba(37, 105, 255, 0.06);
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+/* Blue top line */
+
+.tracking-card::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 3px;
+
+    background: #2878ff;
+
+    box-shadow:
+        0 0 15px rgba(40, 120, 255, 0.7);
+}
+
+
+/* =========================================
+   ICON
+========================================= */
+
+.tracking-icon {
+    width: 65px;
+    height: 65px;
+
+    margin: 0 auto 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 16px;
+
+    background: rgba(40, 120, 255, 0.10);
+
+    border: 1px solid rgba(40, 120, 255, 0.25);
+
+    color: #2878ff;
+
+    font-size: 28px;
+
+    box-shadow:
+        0 0 25px rgba(40, 120, 255, 0.08);
+}
+
+
+/* =========================================
+   HEADING
+========================================= */
+
+.tracking-card h1 {
+    text-align: center;
+
+    font-size: 38px;
+
+    font-weight: 700;
+
+    letter-spacing: -1px;
+
+    color: #ffffff;
+
+    margin-bottom: 12px;
+}
+
+
+/* Blue word if using span */
+
+.tracking-card h1 span {
+    color: #2878ff;
+}
+
+
+/* =========================================
+   SUBTITLE
+========================================= */
+
+.subtitle {
+    max-width: 430px;
+
+    margin: 0 auto 38px;
+
+    text-align: center;
+
+    color: #71809c;
+
+    font-size: 15px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================
+   DJANGO MESSAGES
+========================================= */
+
+.message {
+    padding: 13px 15px;
+
+    margin-bottom: 24px;
+
+    border-radius: 9px;
+
+    text-align: center;
+
+    font-size: 14px;
+
+    color: #ff7373;
+
+    background: rgba(255, 70, 70, 0.08);
+
+    border: 1px solid rgba(255, 70, 70, 0.20);
+}
+
+
+/* =========================================
+   FORM GROUP
+========================================= */
+
+.form-group {
+    margin-bottom: 23px;
+}
+
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 10px;
+
+    color: #e8edf7;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+
+/* =========================================
+   INPUT
+========================================= */
+
+.form-group input {
+    width: 100%;
+
+    height: 58px;
+
+    padding: 0 18px;
+
+    background: #080f1d;
+
+    border: 1px solid #1c2a42;
+
+    border-radius: 10px;
+
+    color: #ffffff;
+
+    font-size: 15px;
+
+    outline: none;
+
+    transition: 0.25s ease;
+}
+
+
+.form-group input::placeholder {
+    color: #53637e;
+}
+
+
+.form-group input:hover {
+    border-color: #2a3c5c;
+}
+
+
+.form-group input:focus {
+    border-color: #2878ff;
+
+    background: #09111f;
+
+    box-shadow:
+        0 0 0 3px rgba(40, 120, 255, 0.10),
+        0 0 20px rgba(40, 120, 255, 0.08);
+}
+
+
+/* =========================================
+   TRACK ORDER BUTTON
+========================================= */
+
+button {
+    width: 100%;
+
+    height: 58px;
+
+    margin-top: 8px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #2878ff;
+
+    color: #ffffff;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: all 0.25s ease;
+
+    box-shadow:
+        0 8px 25px rgba(40, 120, 255, 0.20);
+}
+
+
+button:hover {
+    background: #3b86ff;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 30px rgba(40, 120, 255, 0.30);
+}
+
+
+button:active {
+    transform: translateY(0);
+}
+
+
+/* =========================================
+   BACK LINK
+========================================= */
+
+.back-link {
+    text-align: center;
+
+    margin-top: 30px;
+
+    padding-top: 25px;
+
+    border-top: 1px solid #182238;
+}
+
+
+.back-link a {
+    color: #60708c;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    transition: 0.2s ease;
+}
+
+
+.back-link a:hover {
+    color: #2878ff;
+}
+
+
+/* =========================================
+   HELP TEXT
+========================================= */
+
+.tracking-help {
+    margin-top: 18px;
+
+    text-align: center;
+
+    color: #4d5c75;
+
+    font-size: 12px;
+}
+
+
+/* =========================================
+   ANIMATION
+========================================= */
+
+.tracking-card {
+    animation: trackingFade 0.5s ease;
+}
+
+
+@keyframes trackingFade {
+
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .tracking-container {
+        padding: 25px 15px;
+    }
+
+    .tracking-card {
+        padding: 38px 25px;
+
+        border-radius: 15px;
+    }
+
+    .tracking-card h1 {
+        font-size: 30px;
+    }
+
+    .subtitle {
+        font-size: 14px;
+
+        margin-bottom: 30px;
+    }
+
+    .form-group input {
+        height: 54px;
+    }
+
+    button {
+        height: 54px;
+    }
+
+}

@@ -1,0 +1,344 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<section class="checkout-section">
+
+    <div class="checkout-container">
+<div class="breadcrumb">
+    <a href="{% url 'home' %}">HOME</a>
+    <span>/</span>
+    <a href="{% url 'cart' %}">CART</a>
+    <span>/</span>
+    <span>CHECKOUT</span>
+</div>
+        <div class="checkout-header">
+
+            <span>SHOPNEX CHECKOUT</span>
+
+            <h1>Complete Your Order</h1>
+
+            <p>
+                Enter your delivery information and place your order.
+            </p>
+
+        </div>
+
+
+        <div class="checkout-layout">
+
+
+            <!-- =================================
+                 CUSTOMER INFORMATION
+            ================================== -->
+
+            <div class="checkout-form-box">
+
+                <h2>
+                    Delivery Information
+                </h2>
+
+                <form
+                    method="POST"
+                    class="checkout-form"
+                >
+
+                    {% csrf_token %}
+
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label>
+                                Full Name
+                            </label>
+
+                            <input
+                                type="text"
+                                name="full_name"
+                                value="{{ request.user.get_full_name }}"
+                                placeholder="Enter your full name"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Email
+                            </label>
+
+                            <input
+                                type="email"
+                                name="email"
+                                value="{{ request.user.email }}"
+                                placeholder="Enter your email"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label>
+                                Phone Number
+                            </label>
+
+                            <input
+                                type="tel"
+                                name="phone"
+                                placeholder="03XX XXXXXXX"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                City
+                            </label>
+
+                            <input
+                                type="text"
+                                name="city"
+                                placeholder="Your city"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Delivery Address
+                        </label>
+
+                        <textarea
+                            name="address"
+                            rows="4"
+                            placeholder="House number, street, area..."
+                            required
+                        ></textarea>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Postal Code
+                        </label>
+
+                        <input
+                            type="text"
+                            name="postal_code"
+                            placeholder="Optional"
+                        >
+
+                    </div>
+
+
+                   <!-- =========================
+     PAYMENT METHOD
+========================= -->
+
+<div class="payment-section">
+
+    <h3>
+        <i class="fa-solid fa-credit-card"></i>
+        Payment Method
+    </h3>
+
+    <div class="payment-options">
+
+        <!-- CASH ON DELIVERY -->
+
+        <label class="payment-option">
+
+            <input
+                type="radio"
+                name="payment_method"
+                value="cod"
+                checked
+            >
+
+            <div class="payment-content">
+
+                <i class="fa-solid fa-money-bill-wave"></i>
+
+                <div>
+                    <strong>Cash on Delivery</strong>
+
+                    <span>
+                        Pay when your order arrives
+                    </span>
+                </div>
+
+            </div>
+
+        </label>
+
+
+        <!-- ONLINE PAYMENT -->
+
+        <label class="payment-option">
+
+            <input
+                type="radio"
+                name="payment_method"
+                value="online"
+            >
+
+            <div class="payment-content">
+
+                <i class="fa-solid fa-credit-card"></i>
+
+                <div>
+                    <strong>Online Payment</strong>
+
+                    <span>
+                        Pay securely online
+                    </span>
+                </div>
+
+            </div>
+
+        </label>
+
+    </div>
+
+</div>
+
+
+                    <button
+                        type="submit"
+                        class="place-order-btn"
+                    >
+
+                        <i class="fa-solid fa-lock"></i>
+
+                        Place Order
+
+                    </button>
+
+                </form>
+
+            </div>
+
+
+            <!-- =================================
+                 ORDER SUMMARY
+            ================================== -->
+
+            <aside class="checkout-summary">
+
+                <h2>
+                    Order Summary
+                </h2>
+
+
+                <div class="checkout-products">
+
+                    {% for item in cart_items %}
+
+                    <div class="checkout-product">
+
+                        <div class="checkout-product-image">
+
+                            {% if item.product.image %}
+
+                                <img
+                                    src="{{ item.product.image.url }}"
+                                    alt="{{ item.product.name }}"
+                                >
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <div class="checkout-product-info">
+
+                            <h3>
+                                {{ item.product.name }}
+                            </h3>
+
+                            <p>
+                                Qty: {{ item.quantity }}
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+
+
+                <div class="summary-line">
+
+                    <span>
+                        Subtotal
+                    </span>
+
+                    <strong>
+                        Rs. {{ subtotal }}
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-line">
+
+                    <span>
+                        Shipping
+                    </span>
+
+                    <strong>
+                        {% if shipping == 0 %}
+                            FREE
+                        {% else %}
+                            Rs. {{ shipping }}
+                        {% endif %}
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-total">
+
+                    <span>
+                        Total
+                    </span>
+
+                    <strong>
+                        Rs. {{ total }}
+                    </strong>
+
+                </div>
+
+            </aside>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

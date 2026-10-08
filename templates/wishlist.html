@@ -1,0 +1,280 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<section class="wishlist-section">
+
+    <div class="wishlist-container">
+
+        <!-- HEADER -->
+
+        <div class="wishlist-header">
+
+            <div>
+
+                <span class="wishlist-label">
+                    SHOPNEX
+                </span>
+
+                <h1>
+                    My Wishlist
+                </h1>
+
+                <p>
+                    Products you've saved for later.
+                </p>
+
+            </div>
+
+            <div class="wishlist-total">
+
+                {{ wishlist_items|length }} Items
+
+            </div>
+
+        </div>
+
+
+        <!-- WISHLIST PRODUCTS -->
+
+        {% if wishlist_items %}
+
+            <div class="wishlist-grid">
+
+                {% for item in wishlist_items %}
+
+                    <article class="wishlist-card">
+
+                        <!-- IMAGE -->
+
+                        <div class="wishlist-image">
+
+                            {% if item.product.image %}
+
+                                <img
+                                    src="{{ item.product.image.url }}"
+                                    alt="{{ item.product.name }}"
+                                >
+
+                            {% else %}
+
+                                <div class="wishlist-no-image">
+
+                                    <i class="fa-solid fa-image"></i>
+
+                                </div>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <!-- CONTENT -->
+
+                        <div class="wishlist-info">
+
+                            <span class="wishlist-category">
+
+                                {{ item.product.category.name }}
+
+                            </span>
+
+
+                            <h2>
+
+                                {{ item.product.name }}
+
+                            </h2>
+
+
+                            <!-- PRICE -->
+
+                            <div class="wishlist-price">
+
+                                {% if item.product.discount_price %}
+
+                                    <span class="wishlist-current-price">
+
+                                        Rs.
+                                        {{ item.product.discount_price }}
+
+                                    </span>
+
+                                    <span class="wishlist-old-price">
+
+                                        Rs.
+                                        {{ item.product.price }}
+
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="wishlist-current-price">
+
+                                        Rs.
+                                        {{ item.product.price }}
+
+                                    </span>
+
+                                {% endif %}
+
+                            </div>
+
+
+                            <!-- STOCK -->
+
+                            {% if item.product.stock > 0 %}
+
+                                <span class="wishlist-stock">
+
+                                    <i class="fa-solid fa-circle"></i>
+
+                                    In Stock
+
+                                </span>
+
+                            {% else %}
+
+                                <span class="wishlist-out-stock">
+
+                                    <i class="fa-solid fa-circle"></i>
+
+                                    Out of Stock
+
+                                </span>
+
+                            {% endif %}
+
+
+                            <!-- ACTIONS -->
+
+                            <div class="wishlist-actions">
+
+                                <a
+                                    href="{% url 'product_detail' item.product.id %}"
+                                    class="wishlist-view-btn"
+                                >
+
+                                    View Product
+
+                                </a>
+
+
+                                {% if item.product.stock > 0 %}
+
+                                    {% if item.product.stock > 0 %}
+
+    <form
+        method="POST"
+        action="{% url 'add_to_cart' item.product.id %}"
+        class="ajax-cart-form"
+        
+    >
+
+        {% csrf_token %}
+
+        <button
+    type="submit"
+    class="wishlist-cart-btn"
+    title="Add to Cart"
+    aria-label="Add to Cart"
+>
+    <i class="fa-solid fa-cart-plus"></i>
+</button>
+
+    </form>
+
+{% else %}
+
+    <button
+        type="button"
+        class="wishlist-cart-btn"
+        disabled
+        title="Out of Stock"
+    >
+
+        <i class="fa-solid fa-ban"></i>
+
+        <span>Out of Stock</span>
+
+    </button>
+
+{% endif %}
+
+                                {% endif %}
+
+
+                                <form
+                                    method="POST"
+                                    action="{% url 'remove_from_wishlist' item.product.id %}"
+                                >
+
+                                    {% csrf_token %}
+
+                                    <button
+                                        type="submit"
+                                        class="wishlist-remove-btn"
+                                        title="Remove from wishlist"
+                                    >
+
+                                        <i class="fa-solid fa-trash"></i>
+
+                                    </button>
+
+                                </form>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <!-- EMPTY WISHLIST -->
+
+            <div class="empty-wishlist">
+
+                <div class="empty-heart">
+
+                    <i class="fa-regular fa-heart"></i>
+
+                </div>
+
+
+                <h2>
+                    Your wishlist is empty
+                </h2>
+
+
+                <p>
+                    Save products you love and find them here later.
+                </p>
+
+
+                <a
+                    href="{% url 'home' %}"
+                    class="browse-products-btn"
+                >
+
+                    <i class="fa-solid fa-bag-shopping"></i>
+
+                    Browse Products
+
+                </a>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+{% endblock %}

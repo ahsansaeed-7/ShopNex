@@ -1,0 +1,271 @@
+
+
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | SHOPNEX</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+</head>
+
+<body>
+
+<div class="auth-page">
+
+    <!-- LEFT BRAND PANEL -->
+    <div class="auth-visual">
+
+        <div class="visual-overlay"></div>
+
+        <div class="visual-content">
+
+            <a href="{% url 'home' %}" class="visual-logo">
+                SHOP<span>NEX</span>
+            </a>
+
+            <div class="visual-text">
+
+                <span class="visual-small">
+                    WELCOME BACK
+                </span>
+
+                <h1>
+                    Your style.<br>
+                    Your choice.
+                </h1>
+
+                <p>
+                    Discover premium products, timeless collections,
+                    and everything you love — all in one place.
+                </p>
+
+            </div>
+
+            <div class="visual-bottom">
+                <span>
+                    <i class="fa-solid fa-shield-halved"></i>
+                    Secure shopping
+                </span>
+
+                <span>
+                    <i class="fa-solid fa-star"></i>
+                    Premium collections
+                </span>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- RIGHT FORM -->
+    <div class="auth-form-area">
+
+        <div class="auth-form-container">
+
+            <div class="mobile-logo">
+                SHOP<span>NEX</span>
+            </div>
+
+            <div class="form-heading">
+
+                <span class="heading-label">
+                    WELCOME BACK
+                </span>
+
+                <h2>
+                    Sign in to ShopNex
+                </h2>
+
+                <p>
+                    Continue your shopping experience.
+                </p>
+
+            </div>
+
+
+            {% if messages %}
+
+                <div class="auth-messages">
+
+                    {% for message in messages %}
+
+                        <div class="auth-message">
+                            {{ message }}
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% endif %}
+
+
+            <form method="POST" class="auth-form">
+
+                {% csrf_token %}
+
+                <!-- USERNAME -->
+                <div class="input-group">
+
+                    <label for="username">
+                        Username
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <i class="fa-regular fa-user"></i>
+
+                        <input
+                            type="text"
+                            id="username"
+                            name="username"
+                            placeholder="Enter your username"
+                            autocomplete="username"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- PASSWORD -->
+                <div class="input-group">
+
+                    <div class="label-row">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+                         <a href="{% url 'password_reset' %}" class="forgot-password">
+                         Forgot Password?
+                         </a>
+                    </div>
+
+                    <div class="input-wrapper">
+
+                        <i class="fa-solid fa-lock"></i>
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            onclick="togglePassword('password', this)"
+                        >
+                            <i class="fa-regular fa-eye"></i>
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- REMEMBER -->
+                <label class="remember-row">
+
+                    <input type="checkbox" name="remember">
+
+                    <span>
+                        Remember me
+                    </span>
+
+                </label>
+
+
+                <!-- LOGIN -->
+                <button type="submit" class="auth-submit">
+
+                    <span>
+                        Sign In
+                    </span>
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </button>
+
+            </form>
+
+
+            <!-- DIVIDER -->
+            <div class="auth-divider">
+                <span>OR</span>
+            </div>
+
+
+            <!-- SIGNUP -->
+            <div class="auth-switch">
+
+                <span>
+                    Don't have an account?
+                </span>
+
+                <a href="{% url 'signup' %}">
+                    Create Account
+                </a>
+
+            </div>
+
+
+            <div class="auth-footer">
+
+                <a href="{% url 'home' %}">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Back to Shop
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function togglePassword(inputId, button) {
+
+    const input = document.getElementById(inputId);
+    const icon = button.querySelector("i");
+
+    if (input.type === "password") {
+
+        input.type = "text";
+
+        icon.classList.remove("fa-eye");
+        icon.classList.add("fa-eye-slash");
+
+    } else {
+
+        input.type = "password";
+
+        icon.classList.remove("fa-eye-slash");
+        icon.classList.add("fa-eye");
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>

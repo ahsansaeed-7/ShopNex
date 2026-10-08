@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="order-success">
+
+    <div class="success-card">
+
+        <div class="success-icon">
+
+            <i class="fa-solid fa-check"></i>
+
+        </div>
+
+
+        <span class="success-label">
+            SHOPNEX
+        </span>
+
+
+        <h1>
+            Order Placed Successfully!
+        </h1>
+
+
+        <p>
+            Thank you for shopping with ShopNex.
+            Your order has been received.
+        </p>
+
+
+        <div class="order-number">
+
+            Order #{{ order.id }}
+
+        </div>
+
+
+        <div class="success-details">
+
+            <div>
+
+                <span>
+                    Total
+                </span>
+
+                <strong>
+                    Rs. {{ order.total }}
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    Payment
+                </span>
+
+                <strong>
+                    Cash on Delivery
+                </strong>
+
+            </div>
+
+
+            <div>
+ <span>Payment Status</span>
+
+        <strong class="
+            payment-status
+            {{ order.payment_status }}
+        ">
+            {{ order.get_payment_status_display }}
+        </strong>
+    </div>
+
+</div>
+                <span>
+                    Status
+                </span>
+
+                <strong>
+                    {{ order.status }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <a
+            href="{% url 'home' %}"
+            class="continue-shopping"
+        >
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+            Continue Shopping
+
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}

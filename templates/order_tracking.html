@@ -1,0 +1,174 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/order_tracking.css' %}">
+<div class="tracking-page">
+
+    <div class="tracking-container">
+<div class="breadcrumb">
+    <a href="{% url 'home' %}">HOME</a>
+    <span>/</span>
+    <span>ORDER TRACKING</span>
+</div>
+        <a href="{% url 'my_orders' %}" class="back-btn">
+            ← Back to My Orders
+        </a>
+
+        <div class="tracking-header">
+
+            <h1>Track Your Order</h1>
+
+            <p>
+                Order #{{ order.id }}
+            </p>
+
+            <span class="current-status">
+                {{ order.status }}
+            </span>
+
+        </div>
+
+
+        <div class="tracking-card">
+
+            <div class="tracking-step
+                {% if order.status == 'Pending' or order.status == 'Confirmed' or order.status == 'Processing' or order.status == 'Shipped' or order.status == 'Delivered' %}
+                completed
+                {% endif %}">
+
+                <div class="step-icon">✓</div>
+
+                <div class="step-content">
+                    <h3>Order Placed</h3>
+                    <p>Your order has been received.</p>
+
+                    <small>
+                        {{ order.created_at|date:"d M Y, h:i A" }}
+                    </small>
+                </div>
+
+            </div>
+
+
+            <div class="tracking-line"></div>
+
+
+            <div class="tracking-step
+                {% if order.status == 'Confirmed' or order.status == 'Processing' or order.status == 'Shipped' or order.status == 'Delivered' %}
+                completed
+                {% endif %}">
+
+                <div class="step-icon">✓</div>
+
+                <div class="step-content">
+                    <h3>Order Confirmed</h3>
+                    <p>Your order has been confirmed.</p>
+                </div>
+
+            </div>
+
+
+            <div class="tracking-line"></div>
+
+
+            <div class="tracking-step
+                {% if order.status == 'Processing' or order.status == 'Shipped' or order.status == 'Delivered' %}
+                completed
+                {% endif %}">
+
+                <div class="step-icon">✓</div>
+
+                <div class="step-content">
+                    <h3>Processing</h3>
+                    <p>Your order is being prepared.</p>
+                </div>
+
+            </div>
+
+
+            <div class="tracking-line"></div>
+
+
+            <div class="tracking-step
+                {% if order.status == 'Shipped' or order.status == 'Delivered' %}
+                completed
+                {% endif %}">
+
+                <div class="step-icon">✓</div>
+
+                <div class="step-content">
+                    <h3>Shipped</h3>
+                    <p>Your order is on the way.</p>
+                </div>
+
+            </div>
+
+
+            <div class="tracking-line"></div>
+
+
+            <div class="tracking-step
+                {% if order.status == 'Delivered' %}
+                completed
+                {% endif %}">
+
+                <div class="step-icon">✓</div>
+
+                <div class="step-content">
+                    <h3>Delivered</h3>
+                    <p>Your order has been delivered.</p>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        {% if order.status == "Cancelled" %}
+
+        <div class="cancelled-order">
+
+            <h3>❌ Order Cancelled</h3>
+
+            <p>
+                This order has been cancelled.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+
+        <div class="tracking-info">
+
+            <div>
+                <strong>Order Date</strong>
+                <span>
+                    {{ order.created_at|date:"d M Y, h:i A" }}
+                </span>
+            </div>
+
+            <div>
+                <strong>Payment</strong>
+                <span>
+                    {{ order.payment_method }}
+                </span>
+            </div>
+
+            <div>
+                <strong>Total</strong>
+                <span>
+                    Rs. {{ order.total }}
+                </span>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

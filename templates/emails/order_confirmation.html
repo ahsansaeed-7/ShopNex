@@ -1,0 +1,468 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ShopNex Order Confirmation</title>
+</head>
+
+<body style="
+    margin:0;
+    padding:0;
+    background:#080b14;
+    font-family:Arial, Helvetica, sans-serif;
+    color:#ffffff;
+">
+
+<table width="100%" cellpadding="0" cellspacing="0" style="background:#080b14; padding:40px 15px;">
+
+<tr>
+<td align="center">
+
+<table
+    width="600"
+    cellpadding="0"
+    cellspacing="0"
+    style="
+        max-width:600px;
+        width:100%;
+        background:#111827;
+        border-radius:18px;
+        overflow:hidden;
+        border:1px solid #24304a;
+    "
+>
+
+<!-- ================= HEADER ================= -->
+
+<tr>
+<td style="
+    padding:30px;
+    text-align:center;
+    background:linear-gradient(135deg,#111827,#0f172a);
+">
+
+    <h1 style="
+        margin:0;
+        font-size:30px;
+        letter-spacing:2px;
+        color:#4da3ff;
+    ">
+        SHOPNEX
+    </h1>
+
+    <p style="
+        margin:8px 0 0;
+        color:#94a3b8;
+        font-size:13px;
+        letter-spacing:1px;
+    ">
+        MODERN E-COMMERCE
+    </p>
+
+</td>
+</tr>
+
+
+<!-- ================= SUCCESS ================= -->
+
+<tr>
+<td style="padding:35px 30px 20px;text-align:center;">
+
+    <div style="
+        width:60px;
+        height:60px;
+        line-height:60px;
+        margin:auto;
+        border-radius:50%;
+        background:#123b2b;
+        color:#4ade80;
+        font-size:28px;
+    ">
+        ✓
+    </div>
+
+    <h2 style="
+        margin:20px 0 8px;
+        font-size:25px;
+        color:#ffffff;
+    ">
+        Order Confirmed!
+    </h2>
+
+    <p style="
+        margin:0;
+        color:#94a3b8;
+        font-size:15px;
+        line-height:1.6;
+    ">
+        Thank you for shopping with ShopNex.
+        Your order has been successfully placed.
+    </p>
+
+</td>
+</tr>
+
+
+<!-- ================= ORDER INFO ================= -->
+
+<tr>
+<td style="padding:20px 30px;">
+
+<table
+    width="100%"
+    cellpadding="0"
+    cellspacing="0"
+    style="
+        background:#0b1220;
+        border:1px solid #24304a;
+        border-radius:12px;
+    "
+>
+
+<tr>
+
+<td style="padding:18px;">
+
+    <p style="
+        margin:0 0 5px;
+        color:#64748b;
+        font-size:12px;
+        text-transform:uppercase;
+    ">
+        Order Number
+    </p>
+
+    <strong style="
+        font-size:17px;
+        color:#4da3ff;
+    ">
+        #{{ order.id }}
+    </strong>
+
+</td>
+
+
+<td style="padding:18px;text-align:right;">
+
+    <p style="
+        margin:0 0 5px;
+        color:#64748b;
+        font-size:12px;
+        text-transform:uppercase;
+    ">
+        Order Date
+    </p>
+
+    <strong style="
+        font-size:15px;
+        color:#ffffff;
+    ">
+        {{ order.created_at|date:"d M Y, h:i A" }}
+    </strong>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+</tr>
+
+
+<!-- ================= CUSTOMER ================= -->
+
+<tr>
+<td style="padding:10px 30px 20px;">
+
+    <h3 style="
+        margin:0 0 15px;
+        color:#ffffff;
+        font-size:17px;
+    ">
+        Customer Details
+    </h3>
+
+    <p style="
+        margin:5px 0;
+        color:#cbd5e1;
+        font-size:14px;
+    ">
+        <strong>Name:</strong>
+        {{ order.full_name }}
+    </p>
+
+    <p style="
+        margin:5px 0;
+        color:#cbd5e1;
+        font-size:14px;
+    ">
+        <strong>Email:</strong>
+        {{ order.email }}
+    </p>
+
+    <p style="
+        margin:5px 0;
+        color:#cbd5e1;
+        font-size:14px;
+    ">
+        <strong>Phone:</strong>
+        {{ order.phone }}
+    </p>
+
+    <p style="
+        margin:5px 0;
+        color:#cbd5e1;
+        font-size:14px;
+    ">
+        <strong>Address:</strong>
+        {{ order.address }}, {{ order.city }}
+    </p>
+
+</td>
+</tr>
+
+
+<!-- ================= PRODUCTS ================= -->
+
+<tr>
+<td style="padding:10px 30px 20px;">
+
+    <h3 style="
+        margin:0 0 15px;
+        color:#ffffff;
+        font-size:17px;
+    ">
+        Order Summary
+    </h3>
+
+<table
+    width="100%"
+    cellpadding="0"
+    cellspacing="0"
+>
+
+<tr>
+<td style="
+    padding:10px 0;
+    border-bottom:1px solid #24304a;
+    color:#64748b;
+    font-size:12px;
+">
+    PRODUCT
+</td>
+
+<td style="
+    padding:10px 0;
+    border-bottom:1px solid #24304a;
+    color:#64748b;
+    font-size:12px;
+    text-align:right;
+">
+    PRICE
+</td>
+</tr>
+
+
+{% for item in order.items.all %}
+
+<tr>
+
+<td style="
+    padding:15px 0;
+    border-bottom:1px solid #1e293b;
+">
+
+    <strong style="
+        color:#ffffff;
+        font-size:14px;
+    ">
+        {{ item.product.name }}
+    </strong>
+
+    <br>
+
+    <span style="
+        color:#64748b;
+        font-size:12px;
+    ">
+        Quantity: {{ item.quantity }}
+    </span>
+
+</td>
+
+
+<td style="
+    padding:15px 0;
+    border-bottom:1px solid #1e293b;
+    text-align:right;
+    color:#ffffff;
+    font-weight:bold;
+">
+
+    Rs. {{ item.price }}
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</td>
+</tr>
+
+
+<!-- ================= TOTAL ================= -->
+
+<tr>
+<td style="padding:10px 30px 30px;">
+
+<table width="100%" cellpadding="0" cellspacing="0">
+
+<tr>
+<td style="
+    padding:8px 0;
+    color:#94a3b8;
+">
+    Subtotal
+</td>
+
+<td style="
+    padding:8px 0;
+    text-align:right;
+    color:#ffffff;
+">
+    Rs. {{ order.subtotal }}
+</td>
+</tr>
+
+
+<tr>
+<td style="
+    padding:8px 0;
+    color:#94a3b8;
+">
+    Shipping
+</td>
+
+<td style="
+    padding:8px 0;
+    text-align:right;
+    color:#ffffff;
+">
+    Rs. {{ order.shipping }}
+</td>
+</tr>
+
+
+<tr>
+<td colspan="2">
+    <div style="
+        height:1px;
+        background:#24304a;
+        margin:10px 0;
+    "></div>
+</td>
+</tr>
+
+
+<tr>
+
+<td style="
+    padding:10px 0;
+    font-size:19px;
+    font-weight:bold;
+    color:#ffffff;
+">
+    Total
+</td>
+
+<td style="
+    padding:10px 0;
+    text-align:right;
+    font-size:21px;
+    font-weight:bold;
+    color:#4da3ff;
+">
+    Rs. {{ order.total }}
+</td>
+
+</tr>
+
+</table>
+
+</td>
+</tr>
+
+
+<!-- ================= STATUS ================= -->
+
+<tr>
+<td style="
+    padding:0 30px 30px;
+    text-align:center;
+">
+
+<span style="
+    display:inline-block;
+    padding:10px 20px;
+    border-radius:30px;
+    background:#172554;
+    color:#60a5fa;
+    font-size:13px;
+    font-weight:bold;
+">
+    {{ order.status }}
+</span>
+
+</td>
+</tr>
+
+
+<!-- ================= FOOTER ================= -->
+
+<tr>
+<td style="
+    padding:25px 30px;
+    text-align:center;
+    background:#0b1220;
+    border-top:1px solid #24304a;
+">
+
+    <p style="
+        margin:0 0 8px;
+        color:#94a3b8;
+        font-size:13px;
+    ">
+        Thank you for choosing
+        <strong style="color:#4da3ff;">
+            ShopNex
+        </strong>
+    </p>
+
+    <p style="
+        margin:0;
+        color:#475569;
+        font-size:11px;
+    ">
+        This is an automated order confirmation email.
+        Please do not reply directly to this email.
+    </p>
+
+</td>
+</tr>
+
+</table>
+
+</td>
+</tr>
+
+</table>
+
+</body>
+</html>

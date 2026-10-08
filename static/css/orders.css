@@ -1,0 +1,271 @@
+/* ================================
+   SHOPNEX ORDERS PAGE
+================================ */
+
+.orders-page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 60px 25px;
+    min-height: 80vh;
+}
+
+
+/* HEADER */
+
+.orders-header {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.orders-header h1 {
+    font-size: 42px;
+    margin-bottom: 10px;
+    color: #111827;
+}
+
+.orders-header p {
+    color: #6b7280;
+    font-size: 16px;
+}
+
+
+/* ORDERS LIST */
+
+.orders-list {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+
+/* ORDER CARD */
+
+.order-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 18px;
+    padding: 28px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+    transition: 0.3s ease;
+}
+
+.order-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+
+/* TOP */
+
+.order-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.order-label {
+    display: block;
+    font-size: 13px;
+    color: #9ca3af;
+    margin-bottom: 5px;
+}
+
+.order-top h3 {
+    margin: 0;
+    font-size: 20px;
+    color: #111827;
+}
+
+
+/* STATUS */
+
+.order-status {
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: capitalize;
+    background: #f3f4f6;
+    color: #374151;
+}
+
+
+/* STATUS COLORS */
+
+.order-status.pending {
+    background: #fff7ed;
+    color: #c2410c;
+}
+
+.order-status.processing {
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+.order-status.shipped {
+    background: #eef2ff;
+    color: #4f46e5;
+}
+
+.order-status.delivered {
+    background: #ecfdf5;
+    color: #059669;
+}
+
+.order-status.cancelled {
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+
+/* ORDER INFO */
+
+.order-info {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    padding: 25px 0;
+}
+
+.order-info div {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.order-info span {
+    font-size: 13px;
+    color: #9ca3af;
+}
+
+.order-info strong {
+    font-size: 15px;
+    color: #111827;
+}
+
+
+/* ACTION */
+
+.order-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 5px;
+}
+
+.view-order {
+    display: inline-block;
+    padding: 11px 22px;
+    background: #111827;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: 0.3s ease;
+}
+
+.view-order:hover {
+    background: #2563eb;
+    transform: translateY(-2px);
+}
+
+
+/* EMPTY */
+
+.empty-orders {
+    text-align: center;
+    padding: 80px 20px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 20px;
+}
+
+.empty-icon {
+    font-size: 55px;
+    margin-bottom: 15px;
+}
+
+.empty-orders h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.empty-orders p {
+    color: #6b7280;
+    margin-bottom: 25px;
+}
+
+.shop-btn {
+    display: inline-block;
+    padding: 12px 25px;
+    background: #111827;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.shop-btn:hover {
+    background: #2563eb;
+}
+
+
+/* ================================
+   MOBILE
+================================ */
+
+@media (max-width: 768px) {
+
+    .orders-page {
+        padding: 40px 15px;
+    }
+
+    .orders-header h1 {
+        font-size: 32px;
+    }
+
+    .order-card {
+        padding: 20px;
+    }
+
+    .order-top {
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .order-info {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .order-actions {
+        justify-content: stretch;
+    }
+
+    .view-order {
+        width: 100%;
+        text-align: center;
+    }
+}
+.order-date {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.order-date span {
+    font-size: 13px;
+    color: #9ca3af;
+}
+
+.order-date strong {
+    font-size: 15px;
+    color: #111827;
+}
+
+.order-date small {
+    font-size: 13px;
+    color: #6b7280;
+}

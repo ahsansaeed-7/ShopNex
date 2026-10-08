@@ -1,0 +1,601 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/admin_dashboard.css' %}">
+
+<div class="admin-dashboard">
+
+    <!-- HEADER -->
+
+    <div class="dashboard-header">
+
+        <div>
+            <h1>Admin Dashboard</h1>
+            <p>Welcome back, Administrator.</p>
+        </div>
+
+        <a href="/admin/" class="django-admin-btn">
+            Django Admin
+        </a>
+
+    </div>
+
+
+    <!-- STAT CARDS -->
+
+    <div class="stats-grid">
+
+        <div class="stat-card">
+            <div class="stat-icon">🛍️</div>
+
+            <div>
+                <span>Total Products</span>
+                <h2>{{ total_products }}</h2>
+            </div>
+        </div>
+
+
+        <div class="stat-card">
+            <div class="stat-icon">📦</div>
+
+            <div>
+                <span>Total Orders</span>
+                <h2>{{ total_orders }}</h2>
+            </div>
+        </div>
+
+
+        <div class="stat-card">
+            <div class="stat-icon">👥</div>
+
+            <div>
+                <span>Customers</span>
+                <h2>{{ total_customers }}</h2>
+            </div>
+        </div>
+
+
+        <div class="stat-card revenue-card">
+            <div class="stat-icon">💰</div>
+
+            <div>
+                <span>Revenue</span>
+                <h2>Rs. {{ total_revenue }}</h2>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- ORDER STATUS -->
+
+    <div class="section-title">
+        <h2>Order Overview</h2>
+    </div>
+
+
+    <div class="order-status-grid">
+
+        <div class="status-card pending">
+            <span>Pending</span>
+            <strong>{{ pending_orders }}</strong>
+        </div>
+
+        <div class="status-card confirmed">
+            <span>Confirmed</span>
+            <strong>{{ confirmed_orders }}</strong>
+        </div>
+
+        <div class="status-card processing">
+            <span>Processing</span>
+            <strong>{{ processing_orders }}</strong>
+        </div>
+
+        <div class="status-card shipped">
+            <span>Shipped</span>
+            <strong>{{ shipped_orders }}</strong>
+        </div>
+
+        <div class="status-card delivered">
+            <span>Delivered</span>
+            <strong>{{ delivered_orders }}</strong>
+        </div>
+
+        <div class="status-card cancelled">
+            <span>Cancelled</span>
+            <strong>{{ cancelled_orders }}</strong>
+        </div>
+
+    </div>
+
+
+    <!-- RECENT ORDERS -->
+
+    <div class="dashboard-section">
+
+        <div class="section-heading">
+
+            <div>
+                <h2>Recent Orders</h2>
+                <p>Latest orders placed by customers.</p>
+            </div>
+
+            <a href="/admin/store/order/">
+                View All
+            </a>
+
+        </div>
+
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Order</th>
+                        <th>Customer</th>
+                        <th>Total</th>
+                        <th>Payment</th>
+                        <th>Status</th>
+                        <th>Date</th>
+                        <th>Action</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for order in recent_orders %}
+
+                    <tr>
+
+                        <td>
+                            #{{ order.id }}
+                        </td>
+
+                        <td>
+                            {{ order.full_name }}
+                        </td>
+
+                        <td>
+                            Rs. {{ order.total }}
+                        </td>
+
+                        <td>
+                            {{ order.payment_method }}
+                        </td>
+
+                        <td>
+
+                            <span class="order-status status-{{ order.status|lower }}">
+                                {{ order.status }}
+                            </span>
+
+                        </td>
+
+                       <td>
+    {{ order.created_at|date:"d M Y, h:i A" }}
+</td>
+
+<td class="action-cell">
+
+    <form
+        method="POST"
+        action="{% url 'update_order_status' order.id %}"
+        class="order-status-form"
+    >
+
+        {% csrf_token %}
+
+        <select
+            name="status"
+            class="status-select"
+        >
+
+            <option
+                value="Pending"
+                {% if order.status == "Pending" %}selected{% endif %}
+            >
+                Pending
+            </option>
+
+            <option
+                value="Confirmed"
+                {% if order.status == "Confirmed" %}selected{% endif %}
+            >
+                Confirmed
+            </option>
+
+            <option
+                value="Processing"
+                {% if order.status == "Processing" %}selected{% endif %}
+            >
+                Processing
+            </option>
+
+            <option
+                value="Shipped"
+                {% if order.status == "Shipped" %}selected{% endif %}
+            >
+                Shipped
+            </option>
+
+            <option
+                value="Delivered"
+                {% if order.status == "Delivered" %}selected{% endif %}
+            >
+                Delivered
+            </option>
+
+            <option
+                value="Cancelled"
+                {% if order.status == "Cancelled" %}selected{% endif %}
+            >
+                Cancelled
+            </option>
+
+        </select>
+
+        <button
+            type="submit"
+            class="update-status-btn"
+        >
+            Update
+        </button>
+
+    </form>
+
+</td>
+
+                    {% empty %}
+
+                    <tr>
+                        <td colspan="7" class="empty">
+                            No orders found.
+                        </td>
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <!-- LOW STOCK -->
+
+    <div class="dashboard-section">
+
+        <div class="section-heading">
+
+            <div>
+                <h2>Low Stock Products</h2>
+                <p>Products that need your attention.</p>
+            </div>
+
+            <a href="/admin/store/product/">
+                Manage Products
+            </a>
+
+        </div>
+
+
+        <div class="low-stock-grid">
+
+            {% for product in low_stock_products %}
+
+            <div class="stock-card">
+
+                <div>
+
+                    <h3>
+                        {{ product.name }}
+                    </h3>
+
+                    <p>
+                        Rs. {{ product.price }}
+                    </p>
+
+                </div>
+
+                <div class="stock-number">
+
+                    <strong>
+                        {{ product.stock }}
+                    </strong>
+
+                    <span>
+                        left
+                    </span>
+
+                </div>
+
+            </div>
+
+            {% empty %}
+
+            <div class="no-stock-warning">
+                All products have healthy stock levels.
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<div class="analytics-section">
+
+    <div class="analytics-header">
+        <h2>Sales Analytics</h2>
+        <p>Performance for the last 7 days</p>
+    </div>
+
+
+    <div class="charts-grid">
+
+        <!-- REVENUE CHART -->
+
+        <div class="chart-card">
+
+            <h3>Revenue</h3>
+
+            <div class="chart-container">
+                <canvas id="revenueChart"></canvas>
+            </div>
+
+        </div>
+
+
+        <!-- ORDERS CHART -->
+
+        <div class="chart-card">
+
+            <h3>Orders</h3>
+
+            <div class="chart-container">
+                <canvas id="ordersChart"></canvas>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- STATUS CHART -->
+
+    <div class="chart-card status-chart-card">
+
+        <h3>Order Status</h3>
+
+        <div class="status-chart-container">
+
+            <canvas id="statusChart"></canvas>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    const salesLabels =
+        {{ sales_labels|safe }};
+
+    const salesData =
+        {{ sales_data|safe }};
+
+    const orderData =
+        {{ order_data|safe }};
+
+    const statusLabels =
+        {{ status_labels|safe }};
+
+    const statusData =
+        {{ status_data|safe }};
+
+
+    // -------------------------
+    // REVENUE CHART
+    // -------------------------
+
+    const revenueCanvas =
+        document.getElementById("revenueChart");
+
+    new Chart(
+        revenueCanvas,
+        {
+            type: "line",
+
+            data: {
+
+                labels: salesLabels,
+
+                datasets: [
+
+                    {
+                        label: "Revenue",
+
+                        data: salesData,
+
+                        borderWidth: 3,
+
+                        tension: 0.4,
+
+                        fill: true
+                    }
+
+                ]
+            },
+
+            options: {
+
+                responsive: true,
+
+                maintainAspectRatio: false,
+
+                plugins: {
+
+                    legend: {
+                        display: false
+                    }
+
+                },
+
+                scales: {
+
+                    y: {
+
+                        beginAtZero: true,
+
+                        ticks: {
+
+                            callback: function(value) {
+
+                                return "Rs. " + value;
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            }
+        }
+    );
+
+
+    // -------------------------
+    // ORDERS CHART
+    // -------------------------
+
+    const ordersCanvas =
+        document.getElementById("ordersChart");
+
+    new Chart(
+        ordersCanvas,
+        {
+            type: "bar",
+
+            data: {
+
+                labels: salesLabels,
+
+                datasets: [
+
+                    {
+                        label: "Orders",
+
+                        data: orderData,
+
+                        borderWidth: 1,
+
+                        borderRadius: 8
+                    }
+
+                ]
+            },
+
+            options: {
+
+                responsive: true,
+
+                maintainAspectRatio: false,
+
+                plugins: {
+
+                    legend: {
+                        display: false
+                    }
+
+                },
+
+                scales: {
+
+                    y: {
+
+                        beginAtZero: true,
+
+                        ticks: {
+
+                            stepSize: 1
+
+                        }
+
+                    }
+
+                }
+
+            }
+        }
+    );
+
+
+    // -------------------------
+    // STATUS CHART
+    // -------------------------
+
+    const statusCanvas =
+        document.getElementById("statusChart");
+
+
+    new Chart(
+        statusCanvas,
+        {
+
+            type: "doughnut",
+
+            data: {
+
+                labels: statusLabels,
+
+                datasets: [
+
+                    {
+                        data: statusData,
+
+                        borderWidth: 2
+                    }
+
+                ]
+
+            },
+
+            options: {
+
+                responsive: true,
+
+                maintainAspectRatio: false,
+
+                plugins: {
+
+                    legend: {
+
+                        position: "bottom"
+
+                    }
+
+                }
+
+            }
+
+        }
+    );
+
+</script>
+{% endblock %}

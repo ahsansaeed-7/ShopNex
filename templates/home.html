@@ -1,0 +1,1919 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+SHOPNEX | Modern E-Commerce
+{% endblock %}
+
+
+{% block content %}
+
+
+
+<!-- =========================
+     SHOPNEX VIDEO SECTION
+========================= -->
+
+<section class="shopnex-video-section">
+
+    <div class="video-container">
+
+        <!-- VIDEO -->
+        <video
+            class="shopnex-video"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="auto"
+        >
+            <source src="{% static 'videos/shopnexxx.mp4' %}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+        <!-- DARK OVERLAY -->
+        <div class="video-overlay"></div>
+
+        <!-- VIDEO CONTENT -->
+        <div class="video-content">
+
+            <span class="video-label">
+                THE SHOPNEX EXPERIENCE
+            </span>
+
+            <h2>
+                Designed to make<br>
+                <span>every purchase better.</span>
+            </h2>
+
+            <p>
+                Discover premium products, effortless shopping
+                and a marketplace built around you.
+            </p>
+
+            <a href="#products" class="video-btn">
+                Explore Collection
+                <span>→</span>
+            </a>
+
+        </div>
+
+        <!-- PLAYING INDICATOR -->
+        <div class="video-status">
+            <span class="status-dot"></span>
+             SHOPNEX / TIMELESS COLLECTION
+        </div>
+
+    </div>
+
+</section>
+<section
+    class="categories"
+    id="categories"
+>
+
+    <div class="section-heading">
+
+        <p>EXPLORE</p>
+
+        <h2>
+            Shop by Category
+        </h2>
+
+    </div>
+
+
+
+<!-- =========================
+     SHOP BY CATEGORY
+========================= -->
+
+
+<!-- ==========================================
+     SHOPNEX COLLECTIONS
+========================================== -->
+
+<section class="collections-section">
+
+    <div class="collections-container">
+
+        <!-- LEFT TEXT -->
+        <div class="collections-intro">
+
+            <span class="collections-label">
+                SHOPNEX COLLECTIONS
+            </span>
+
+            <h2>
+                Explore Our
+                <span>Collections</span>
+            </h2>
+
+            <p>
+                Discover something special for every style.
+                Explore our carefully selected jewelry collections
+                designed to make every moment shine.
+            </p>
+
+        </div>
+
+
+        <!-- RIGHT SLIDER -->
+        <div class="collections-slider-area">
+
+            <!-- LEFT ARROW -->
+            <button
+                type="button"
+                class="category-arrow category-prev"
+                aria-label="Previous category"
+            >
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
+
+
+            <!-- CATEGORY CARDS -->
+            <div
+                class="categories-slider"
+                id="categoriesSlider"
+            >
+
+                {% for category in categories %}
+
+                <a
+                    href="?category={{ category.name|urlencode }}"
+                    class="category-card"
+                >
+
+                    <!-- IMAGE -->
+                    <div class="category-image">
+
+                        {% if category.image %}
+
+                            <img
+                                src="{{ category.image.url }}"
+                                alt="{{ category.name }}"
+                            >
+
+                        {% else %}
+
+                            <div class="category-placeholder">
+                                <i class="fa-solid fa-gem"></i>
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <!-- CARD CONTENT -->
+                    <div class="category-info">
+
+                        <h3>
+                            {{ category.name }}
+                        </h3>
+
+                        <span>
+                            Explore Collection
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </span>
+
+                    </div>
+
+                </a>
+
+                {% empty %}
+
+                    <div class="no-categories">
+                        No collections available.
+                    </div>
+
+                {% endfor %}
+        <!-- ==================================
+             VIEW ALL PRODUCTS
+             ALWAYS LAST
+        ================================== -->
+<a 
+    href="{% url 'home' %}" 
+    class="view-all-card"
+>
+
+    <!-- IMAGE -->
+    <div class="view-all-image">
+        <img 
+            src="{% static 'images/viewall.jpeg' %}" 
+            alt="View All Products"
+        >
+    </div>
+
+    <!-- ICON -->
+    <div class="view-all-icon">
+
+        <i class="fa-solid fa-border-all"></i>
+
+    </div>
+
+    <!-- CONTENT -->
+    <div class="view-all-content">
+
+        <h3>
+            View All Products
+        </h3>
+
+        <span>
+            Explore Everything
+            <i class="fa-solid fa-arrow-right"></i>
+        </span>
+
+    </div>
+
+</a>
+            </div>
+
+
+            <!-- RIGHT ARROW -->
+            <button
+                type="button"
+                class="category-arrow category-next"
+                aria-label="Next category"
+            >
+                <i class="fa-solid fa-chevron-right"></i>
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+<section class="new-arrivals-section">
+
+    <div class="new-arrivals-heading">
+        <span>SHOPNEX COLLECTION</span>
+
+        <h2>New Arrivals</h2>
+
+        <p>
+            Our latest products and newest additions
+        </p>
+    </div>
+
+
+    <div class="new-arrivals-grid">
+
+        {% for product in new_arrivals %}
+
+        <div class="new-arrival-card">
+
+            <!-- PRODUCT IMAGE -->
+            <a
+                href="{% url 'product_detail' product.pk %}"
+                class="new-arrival-image-link"
+            >
+
+                <div class="new-arrival-image">
+
+                    {% if product.image %}
+
+                        <img
+                            src="{{ product.image.url }}"
+                            alt="{{ product.name }}"
+                        >
+
+                    {% else %}
+
+                        <div class="no-product-image">
+                            No Image
+                        </div>
+
+                    {% endif %}
+
+
+                    <!-- NEW BADGE -->
+                    <span class="new-badge">
+                        NEW
+                    </span>
+
+
+                    <!-- SALE BADGE -->
+                    {% if product.discount_price %}
+
+                        <span class="sale-badge">
+                            SALE
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+            </a>
+
+
+            <!-- PRODUCT INFORMATION -->
+            <div class="new-arrival-info">
+
+                <h3>
+
+                    <a href="{% url 'product_detail' product.pk %}">
+                        {{ product.name }}
+                    </a>
+
+                </h3>
+
+
+                <!-- CATEGORY -->
+                <p class="new-arrival-category">
+                    {{ product.category }}
+                </p>
+
+
+                <!-- PRICE -->
+                <div class="new-arrival-price">
+
+                    {% if product.discount_price %}
+
+                        <span class="discount-price">
+                            Rs. {{ product.discount_price|floatformat:2 }}
+                        </span>
+
+                        <span class="old-price">
+                            Rs. {{ product.price|floatformat:2 }}
+                        </span>
+
+                    {% else %}
+
+                        <span class="normal-price">
+                            Rs. {{ product.price|floatformat:2 }}
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+
+                <!-- STOCK -->
+                {% if product.in_stock %}
+
+                    <div class="new-arrival-stock in-stock">
+                        <i class="fa-solid fa-circle-check"></i>
+                        In Stock
+                    </div>
+
+                {% else %}
+
+                    <div class="new-arrival-stock out-of-stock">
+                        Out of Stock
+                    </div>
+
+                {% endif %}
+
+
+                <!-- VIEW PRODUCT -->
+                <a
+                    href="{% url 'product_detail' product.pk %}"
+                    class="new-arrival-button"
+                >
+                    VIEW PRODUCT
+                </a>
+
+            </div>
+
+        </div>
+
+
+        {% empty %}
+
+            <div class="no-new-arrivals">
+
+                <h3>No New Arrivals Yet</h3>
+
+                <p>
+                    New products will appear here when they are added.
+                </p>
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+<!-- =====================================================
+     PRODUCTS SECTION
+====================================================== -->
+
+<section class="products-section" id="products">
+
+    <!-- SECTION HEADING -->
+    <div class="section-heading">
+        <p>OUR COLLECTION</p>
+        <h2>Discover Products</h2>
+    </div>
+
+
+    <!-- =================================================
+         SHOPNEX SHOP AREA
+    ================================================== -->
+
+    <section class="sx-products">
+
+        <!-- HEADER -->
+        <div class="sx-products-header">
+
+            
+
+            <div class="sx-title-row">
+
+                <div>
+                    
+
+                    <p class="sx-count">
+                        {{ products|length }} products
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             SHOP CONTROLS
+        ================================================== -->
+
+        <div class="sx-shop-controls">
+
+            
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             FILTER OVERLAY
+        ================================================== -->
+
+        <div
+            class="filter-overlay"
+            id="sxFilterOverlay">
+        </div>
+
+
+        <!-- =================================================
+             SLIDE-IN FILTER SIDEBAR
+        ================================================== -->
+
+        <aside
+            class="sx-filter-panel"
+            id="sxFilterPanel"
+        >
+
+            <!-- FILTER HEADER -->
+
+            <div class="sx-filter-mobile-head">
+
+                <div>
+
+                    <span>
+                        SHOPNEX
+                    </span>
+
+                    <h3>
+                        Filters
+                    </h3>
+
+                </div>
+
+                <button
+                    type="button"
+                    id="sxCloseFilter"
+                    aria-label="Close filters"
+                >
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+
+            </div>
+
+
+            <!-- FILTER HEADING -->
+
+            <div class="sx-filter-heading">
+
+                <h3>
+                    FILTERS
+                </h3>
+
+                <a href="{% url 'home' %}#products">
+                    Clear All
+                </a>
+
+            </div>
+
+
+            <!-- =================================================
+                 CATEGORY
+            ================================================== -->
+
+            <div class="sx-filter-group">
+
+                <button
+                    type="button"
+                    class="sx-filter-title"
+                >
+                    <span>Category</span>
+
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+
+
+                <div class="sx-filter-options">
+
+                    {% for category in categories %}
+
+                    <label class="sx-check">
+
+                        <input
+                            type="checkbox"
+                            name="category"
+                            value="{{ category.name }}"
+                            class="sx-category-filter"
+                        >
+
+                        <span>
+                            {{ category.name }}
+                        </span>
+
+                    </label>
+
+                    {% empty %}
+
+                    <p>
+                        No categories available.
+                    </p>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 PRICE
+            ================================================== -->
+
+            <div class="sx-filter-group">
+
+                <button
+                    type="button"
+                    class="sx-filter-title"
+                >
+
+                    <span>
+                        Price Range
+                    </span>
+
+                    <i class="fa-solid fa-chevron-down"></i>
+
+                </button>
+
+
+                <div class="sx-price-labels">
+
+                    <span>
+                        PKR 0
+                    </span>
+
+                    <span>
+                        PKR 50,000
+                    </span>
+
+                </div>
+
+
+                <div class="sx-price-slider">
+
+                    <input
+                        type="range"
+                        id="sxMinPrice"
+                        min="0"
+                        max="50000"
+                        value="0"
+                        step="100"
+                    >
+
+                    <input
+                        type="range"
+                        id="sxMaxPrice"
+                        min="0"
+                        max="50000"
+                        value="50000"
+                        step="100"
+                    >
+
+                </div>
+
+
+                <div class="sx-price-inputs">
+
+                    <input
+                        type="number"
+                        id="sxMinPriceInput"
+                        value="0"
+                        min="0"
+                        placeholder="PKR 0"
+                    >
+
+                    <input
+                        type="number"
+                        id="sxMaxPriceInput"
+                        value="50000"
+                        min="0"
+                        placeholder="PKR 50,000"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 BRAND
+            ================================================== -->
+
+            <div class="sx-filter-group">
+
+                <button
+                    type="button"
+                    class="sx-filter-title"
+                >
+
+                    <span>
+                        Brand
+                    </span>
+
+                    <i class="fa-solid fa-chevron-down"></i>
+
+                </button>
+
+
+                <div class="sx-filter-options">
+
+                    {% for brand in brands %}
+
+                    <label class="sx-check">
+
+                        <input
+                            type="checkbox"
+                            name="brand"
+                            value="{{ brand }}"
+                        >
+
+                        <span>
+                            {{ brand }}
+                        </span>
+
+                    </label>
+
+                    {% empty %}
+
+                    <p class="sx-empty">
+                        No brands available
+                    </p>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 RATING
+            ================================================== -->
+
+            <div class="sx-filter-group">
+
+                <button
+                    type="button"
+                    class="sx-filter-title"
+                >
+
+                    <span>
+                        Rating
+                    </span>
+
+                    <i class="fa-solid fa-chevron-down"></i>
+
+                </button>
+
+
+                <div class="sx-rating-options">
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            value="5"
+                        >
+
+                        <span class="sx-stars">
+                            ★★★★★
+                        </span>
+
+                        <small>& up</small>
+                    </label>
+
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            value="4"
+                        >
+
+                        <span class="sx-stars">
+                            ★★★★☆
+                        </span>
+
+                        <small>& up</small>
+                    </label>
+
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            value="3"
+                        >
+
+                        <span class="sx-stars">
+                            ★★★☆☆
+                        </span>
+
+                        <small>& up</small>
+                    </label>
+
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            value="2"
+                        >
+
+                        <span class="sx-stars">
+                            ★★☆☆☆
+                        </span>
+
+                        <small>& up</small>
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 COLOR
+            ================================================== -->
+
+            <div class="sx-filter-group">
+
+                <button
+                    type="button"
+                    class="sx-filter-title"
+                >
+
+                    <span>
+                        Color
+                    </span>
+
+                    <i class="fa-solid fa-chevron-down"></i>
+
+                </button>
+
+
+                <div class="sx-colors">
+
+                    <button
+                        type="button"
+                        class="sx-color sx-white"
+                        data-color="white"
+                    ></button>
+
+                    <button
+                        type="button"
+                        class="sx-color sx-black"
+                        data-color="black"
+                    ></button>
+
+                    <button
+                        type="button"
+                        class="sx-color sx-gold"
+                        data-color="gold"
+                    ></button>
+
+                    <button
+                        type="button"
+                        class="sx-color sx-silver"
+                        data-color="silver"
+                    ></button>
+
+                    <button
+                        type="button"
+                        class="sx-color sx-blue"
+                        data-color="blue"
+                    ></button>
+
+                    <button
+                        type="button"
+                        class="sx-more-color"
+                    >
+                        + More
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 AVAILABILITY
+            ================================================== -->
+
+            <div class="sx-filter-group">
+
+                <button
+                    type="button"
+                    class="sx-filter-title"
+                >
+
+                    <span>
+                        Availability
+                    </span>
+
+                    <i class="fa-solid fa-chevron-down"></i>
+
+                </button>
+
+
+                <label class="sx-check">
+
+                    <input type="checkbox">
+
+                    <span>
+                        In Stock
+                    </span>
+
+                </label>
+
+
+                <label class="sx-check">
+
+                    <input type="checkbox">
+
+                    <span>
+                        Out of Stock
+                    </span>
+
+                </label>
+
+            </div>
+
+
+            <!-- =================================================
+                 DISCOUNT
+            ================================================== -->
+
+            <div class="sx-filter-group">
+
+                <button
+                    type="button"
+                    class="sx-filter-title"
+                >
+
+                    <span>
+                        Discount
+                    </span>
+
+                    <i class="fa-solid fa-chevron-down"></i>
+
+                </button>
+
+
+                <label class="sx-check">
+
+                    <input
+                        type="checkbox"
+                        value="10"
+                    >
+
+                    <span>
+                        10% or more
+                    </span>
+
+                </label>
+
+
+                <label class="sx-check">
+
+                    <input
+                        type="checkbox"
+                        value="20"
+                    >
+
+                    <span>
+                        20% or more
+                    </span>
+
+                </label>
+
+
+                <label class="sx-check">
+
+                    <input
+                        type="checkbox"
+                        value="30"
+                    >
+
+                    <span>
+                        30% or more
+                    </span>
+
+                </label>
+
+            </div>
+
+
+            <!-- APPLY -->
+
+            <button
+                type="button"
+                class="sx-apply-btn"
+                onclick="applyFilters()"
+            >
+                APPLY FILTERS
+            </button>
+
+        </aside>
+
+
+        <!-- =================================================
+             PRODUCTS AREA
+        ================================================== -->
+
+        <div class="sx-products-area">
+<div class="breadcrumb">
+    <a href="{% url 'home' %}">HOME</a>
+    <span>/</span>
+    <a href="{% url 'home' %}#categories">SHOP</a>
+    
+</div>
+            <!-- PRODUCT GRID -->
+<div class="sx-shop-controls">
+
+    <!-- FILTER BUTTON -->
+    <button type="button" id="sxOpenFilter" class="sx-filter-btn">
+        <i class="fa-solid fa-sliders"></i>
+        <span>FILTER</span>
+    </button>
+
+    <!-- SORT -->
+    <div class="sx-sort-box">
+        <label for="sxSort">Sort by:</label>
+
+        <select id="sxSort" onchange="applySort(this.value)">
+
+            <option value="featured"
+                {% if request.GET.sort == "featured" or not request.GET.sort %}
+                    selected
+                {% endif %}>
+                Featured
+            </option>
+
+            <option value="newest"
+                {% if request.GET.sort == "newest" %}
+                    selected
+                {% endif %}>
+                Newest
+            </option>
+
+            <option value="price_low"
+                {% if request.GET.sort == "price_low" %}
+                    selected
+                {% endif %}>
+                Price: Low to High
+            </option>
+
+            <option value="price_high"
+                {% if request.GET.sort == "price_high" %}
+                    selected
+                {% endif %}>
+                Price: High to Low
+            </option>
+
+            <option value="rating"
+                {% if request.GET.sort == "rating" %}
+                    selected
+                {% endif %}>
+                Highest Rated
+            </option>
+
+            <option value="name"
+                {% if request.GET.sort == "name" %}
+                    selected
+                {% endif %}>
+                Name: A-Z
+            </option>
+
+        </select>
+    </div>
+
+</div>
+            <div class="products-grid" >
+
+                {% for product in products %}
+
+                <article class="product-card">
+
+                    <!-- PRODUCT IMAGE -->
+
+                    <div class="product-image">
+
+                        {% if product.image %}
+
+                        <img
+                            src="{{ product.image.url }}"
+                            alt="{{ product.name }}"
+                        >
+
+                        {% else %}
+
+                        <div class="no-image">
+                            <i class="fa-solid fa-image"></i>
+                        </div>
+
+                        {% endif %}
+
+
+                        <!-- SALE -->
+
+                        {% if product.discount_price %}
+
+                        <span class="discount-badge">
+                            SALE
+                        </span>
+
+                        {% endif %}
+
+
+                        <!-- WISHLIST -->
+
+                        <form
+                            method="POST"
+                            action="{% url 'add_to_wishlist' product.id %}"
+                            class="ajax-wishlist-form"
+                        >
+
+                            {% csrf_token %}
+
+                            <button
+                                type="submit"
+                                class="wishlist-btn"
+                                title="Add to wishlist"
+                            >
+
+                                <i class="fa-regular fa-heart"></i>
+
+                            </button>
+
+                        </form>
+
+                    </div>
+
+
+                    <!-- PRODUCT INFO -->
+
+                    <div class="product-info">
+
+                        <p class="product-category">
+                            {{ product.category.name }}
+                        </p>
+
+
+                        <h3>
+                            {{ product.name }}
+                        </h3>
+
+
+                        <!-- RATING -->
+
+                        <div class="product-rating">
+
+                            <span class="stars">
+
+                                {% if product.rating >= 1 %}
+                                    <i class="fa-solid fa-star filled"></i>
+                                {% else %}
+                                    <i class="fa-regular fa-star"></i>
+                                {% endif %}
+
+                                {% if product.rating >= 2 %}
+                                    <i class="fa-solid fa-star filled"></i>
+                                {% else %}
+                                    <i class="fa-regular fa-star"></i>
+                                {% endif %}
+
+                                {% if product.rating >= 3 %}
+                                    <i class="fa-solid fa-star filled"></i>
+                                {% else %}
+                                    <i class="fa-regular fa-star"></i>
+                                {% endif %}
+
+                                {% if product.rating >= 4 %}
+                                    <i class="fa-solid fa-star filled"></i>
+                                {% else %}
+                                    <i class="fa-regular fa-star"></i>
+                                {% endif %}
+
+                                {% if product.rating >= 5 %}
+                                    <i class="fa-solid fa-star filled"></i>
+                                {% else %}
+                                    <i class="fa-regular fa-star"></i>
+                                {% endif %}
+
+                            </span>
+
+
+                            <span class="rating-number">
+                                {{ product.rating|floatformat:1 }}
+                            </span>
+
+                        </div>
+
+
+                        <!-- PRICE -->
+
+                        <div class="price">
+
+                            {% if product.discount_price %}
+
+                            <span class="old-price">
+                                Rs.{{ product.price }}
+                            </span>
+
+                            <span class="current-price">
+                                Rs.{{ product.discount_price }}
+                            </span>
+
+                            {% else %}
+
+                            <span class="current-price">
+                                Rs.{{ product.price }}
+                            </span>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <!-- CART -->
+
+                        {% if product.in_stock %}
+
+                        <form
+                            method="POST"
+                            action="{% url 'add_to_cart' product.id %}"
+                            class="ajax-cart-form"
+                        >
+
+                            {% csrf_token %}
+
+                            <button
+                                type="submit"
+                                class="add-cart-btn"
+                            >
+
+                                <i class="fa-solid fa-cart-shopping"></i>
+
+                                <span>
+                                    Add to Cart
+                                </span>
+
+                            </button>
+
+                        </form>
+
+                        {% else %}
+
+                        <button
+                            type="button"
+                            class="add-cart-btn"
+                            disabled
+                        >
+
+                            <i class="fa-solid fa-ban"></i>
+
+                            Out of Stock
+
+                        </button>
+
+                        {% endif %}
+
+
+                        <!-- VIEW PRODUCT -->
+
+                        <a
+                            href="{% url 'product_detail' product.id %}"
+                            class="view-product"
+                        >
+
+                            View Details
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+                {% empty %}
+
+                <div class="empty-products">
+
+                    <i class="fa-solid fa-box-open"></i>
+
+                    <h3>
+                        No products found
+                    </h3>
+
+                    <p>
+                        Try changing your search or filters.
+                    </p>
+
+                    <a href="{% url 'home' %}#products">
+                        Clear Filters
+                    </a>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </section>
+
+</section>
+<script>
+/* =====================================================
+   SHOPNEX FILTER + SORT SYSTEM
+   Compatible with current Django home() view
+===================================================== */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    /* =================================================
+       ELEMENTS
+    ================================================= */
+
+    const openFilterBtn = document.getElementById("sxOpenFilter");
+    const closeFilterBtn = document.getElementById("sxCloseFilter");
+
+    const filterPanel = document.getElementById("sxFilterPanel");
+    const filterOverlay = document.getElementById("sxFilterOverlay");
+
+    const minPrice = document.getElementById("sxMinPrice");
+    const maxPrice = document.getElementById("sxMaxPrice");
+
+    const minPriceInput = document.getElementById("sxMinPriceInput");
+    const maxPriceInput = document.getElementById("sxMaxPriceInput");
+
+    const sortSelect = document.getElementById("sxSort");
+
+
+    /* =================================================
+       OPEN FILTER SIDEBAR
+    ================================================= */
+
+    function openFilters() {
+
+        if (!filterPanel || !filterOverlay) {
+            console.error("ShopNex filter elements not found.");
+            return;
+        }
+
+        filterPanel.classList.add("active");
+        filterOverlay.classList.add("active");
+
+        document.body.classList.add("sx-filter-open");
+    }
+
+
+    /* =================================================
+       CLOSE FILTER SIDEBAR
+    ================================================= */
+
+    function closeFilters() {
+
+        if (!filterPanel || !filterOverlay) {
+            return;
+        }
+
+        filterPanel.classList.remove("active");
+        filterOverlay.classList.remove("active");
+
+        document.body.classList.remove("sx-filter-open");
+    }
+
+
+    /* =================================================
+       OPEN FILTER BUTTON
+    ================================================= */
+
+    if (openFilterBtn) {
+
+        openFilterBtn.addEventListener("click", function (event) {
+
+            event.preventDefault();
+
+            openFilters();
+
+        });
+
+    }
+
+
+    /* =================================================
+       CLOSE FILTER BUTTON
+    ================================================= */
+
+    if (closeFilterBtn) {
+
+        closeFilterBtn.addEventListener("click", function (event) {
+
+            event.preventDefault();
+
+            closeFilters();
+
+        });
+
+    }
+
+
+    /* =================================================
+       CLOSE OVERLAY
+    ================================================= */
+
+    if (filterOverlay) {
+
+        filterOverlay.addEventListener("click", function () {
+
+            closeFilters();
+
+        });
+
+    }
+
+
+    /* =================================================
+       ESC KEY
+    ================================================= */
+
+    document.addEventListener("keydown", function (event) {
+
+        if (event.key === "Escape") {
+
+            closeFilters();
+
+        }
+
+    });
+
+
+    /* =================================================
+       PREVENT BACKGROUND SCROLL
+    ================================================= */
+
+    const bodyStyle = document.createElement("style");
+
+    bodyStyle.innerHTML = `
+        body.sx-filter-open {
+            overflow: hidden;
+        }
+    `;
+
+    document.head.appendChild(bodyStyle);
+
+
+    /* =================================================
+       FILTER ACCORDION
+    ================================================= */
+
+    const filterTitles = document.querySelectorAll(
+        ".sx-filter-panel .sx-filter-title"
+    );
+
+    filterTitles.forEach(function (title) {
+
+        const group = title.closest(".sx-filter-group");
+
+        if (!group) return;
+
+        title.addEventListener("click", function () {
+
+            group.classList.toggle("active");
+
+            const icon = title.querySelector("i");
+
+            if (icon) {
+
+                icon.style.transform =
+                    group.classList.contains("active")
+                        ? "rotate(180deg)"
+                        : "rotate(0deg)";
+
+            }
+
+        });
+
+    });
+
+
+    /* =================================================
+       PRICE SLIDER
+    ================================================= */
+
+    function updatePriceValues() {
+
+        if (!minPrice || !maxPrice) return;
+
+        let minValue = parseInt(minPrice.value) || 0;
+        let maxValue = parseInt(maxPrice.value) || 50000;
+
+
+        if (minValue > maxValue) {
+
+            minValue = maxValue;
+
+            minPrice.value = minValue;
+
+        }
+
+
+        if (minPriceInput) {
+
+            minPriceInput.value = minValue;
+
+        }
+
+        if (maxPriceInput) {
+
+            maxPriceInput.value = maxValue;
+
+        }
+
+    }
+
+
+    if (minPrice) {
+
+        minPrice.addEventListener("input", function () {
+
+            updatePriceValues();
+
+        });
+
+    }
+
+
+    if (maxPrice) {
+
+        maxPrice.addEventListener("input", function () {
+
+            updatePriceValues();
+
+        });
+
+    }
+
+
+    /* =================================================
+       MIN PRICE INPUT
+    ================================================= */
+
+    if (minPriceInput) {
+
+        minPriceInput.addEventListener("input", function () {
+
+            let value = parseInt(this.value) || 0;
+
+            let maxValue =
+                maxPriceInput
+                    ? parseInt(maxPriceInput.value) || 50000
+                    : 50000;
+
+
+            if (value < 0) {
+                value = 0;
+            }
+
+            if (value > maxValue) {
+                value = maxValue;
+            }
+
+
+            this.value = value;
+
+            if (minPrice) {
+                minPrice.value = value;
+            }
+
+        });
+
+    }
+
+
+    /* =================================================
+       MAX PRICE INPUT
+    ================================================= */
+
+    if (maxPriceInput) {
+
+        maxPriceInput.addEventListener("input", function () {
+
+            let value = parseInt(this.value) || 0;
+
+            let minValue =
+                minPriceInput
+                    ? parseInt(minPriceInput.value) || 0
+                    : 0;
+
+
+            if (value < minValue) {
+                value = minValue;
+            }
+
+            if (value > 50000) {
+                value = 50000;
+            }
+
+
+            this.value = value;
+
+            if (maxPrice) {
+                maxPrice.value = value;
+            }
+
+        });
+
+    }
+
+
+    /* =================================================
+       COLOR FILTER
+       NOTE:
+       Your current Django home() view does NOT support
+       color filtering, so color is only visual for now.
+    ================================================= */
+
+    const colorButtons = document.querySelectorAll(".sx-color");
+
+    colorButtons.forEach(function (button) {
+
+        button.addEventListener("click", function () {
+
+            colorButtons.forEach(function (item) {
+
+                item.classList.remove("selected");
+
+            });
+
+            this.classList.add("selected");
+
+            console.log(
+                "Selected color:",
+                this.dataset.color
+            );
+
+        });
+
+    });
+
+
+    /* =================================================
+       MORE COLORS
+    ================================================= */
+
+    const moreColorBtn =
+        document.querySelector(".sx-more-color");
+
+    if (moreColorBtn) {
+
+        moreColorBtn.addEventListener("click", function () {
+
+            alert(
+                "More color options will be available soon."
+            );
+
+        });
+
+    }
+
+
+    /* =================================================
+       APPLY FILTERS
+       MATCHES YOUR DJANGO VIEW
+    ================================================= */
+
+    window.applyFilters = function () {
+
+        const params = new URLSearchParams();
+
+
+        /* =================================================
+           KEEP SEARCH
+        ================================================= */
+
+        const currentParams =
+            new URLSearchParams(window.location.search);
+
+        const search =
+            currentParams.get("search");
+
+        if (search) {
+
+            params.set(
+                "search",
+                search
+            );
+
+        }
+
+
+        /* =================================================
+           CATEGORY
+
+           Django view expects:
+
+           category = request.GET.get("category", "")
+
+           and:
+
+           products.filter(category__name__iexact=category)
+
+           Therefore send CATEGORY NAME,
+           not category ID.
+        ================================================= */
+
+        const selectedCategory =
+            document.querySelector(
+                ".sx-category-filter:checked"
+            );
+
+        if (selectedCategory) {
+
+            /*
+             * If your checkbox value is the category NAME:
+             */
+
+            params.set(
+                "category",
+                selectedCategory.value
+            );
+
+        }
+
+
+        /* =================================================
+           MIN PRICE
+        ================================================= */
+
+        if (
+            minPriceInput &&
+            minPriceInput.value !== ""
+        ) {
+
+            params.set(
+                "min_price",
+                minPriceInput.value
+            );
+
+        }
+
+
+        /* =================================================
+           MAX PRICE
+        ================================================= */
+
+        if (
+            maxPriceInput &&
+            maxPriceInput.value !== ""
+        ) {
+
+            params.set(
+                "max_price",
+                maxPriceInput.value
+            );
+
+        }
+
+
+        /* =================================================
+           RATING
+
+           Your Django view expects ONE rating value:
+
+           rating__gte=float(rating)
+
+           Therefore only one rating should be sent.
+        ================================================= */
+
+        const selectedRating =
+            document.querySelector(
+                ".sx-rating-options input:checked"
+            );
+
+        if (selectedRating) {
+
+            params.set(
+                "rating",
+                selectedRating.value
+            );
+
+        }
+
+
+        /* =================================================
+           SORT
+        ================================================= */
+
+        if (
+            sortSelect &&
+            sortSelect.value !== ""
+        ) {
+
+            params.set(
+                "sort",
+                sortSelect.value
+            );
+
+        }
+
+
+        /* =================================================
+           DEBUG
+        ================================================= */
+
+        console.log(
+            "ShopNex Filter Parameters:",
+            params.toString()
+        );
+
+
+        /* =================================================
+           REDIRECT
+        ================================================= */
+
+        window.location.href =
+            window.location.pathname +
+            "?" +
+            params.toString();
+
+    };
+
+
+    /* =================================================
+       APPLY SORT
+    ================================================= */
+
+    window.applySort = function (value) {
+
+        if (!value) return;
+
+
+        const params =
+            new URLSearchParams(
+                window.location.search
+            );
+
+
+        params.set(
+            "sort",
+            value
+        );
+
+
+        window.location.href =
+            window.location.pathname +
+            "?" +
+            params.toString();
+
+    };
+
+
+    /* =================================================
+       CLEAR FILTERS
+    ================================================= */
+
+    const clearFilters =
+        document.querySelector(
+            ".sx-filter-heading a"
+        );
+
+    if (clearFilters) {
+
+        clearFilters.addEventListener(
+            "click",
+            function () {
+
+                closeFilters();
+
+            }
+        );
+
+    }
+
+
+    /* =================================================
+       INITIAL PRICE VALUES
+    ================================================= */
+
+    updatePriceValues();
+
+
+    /* =================================================
+       OPEN ALL FILTER GROUPS
+    ================================================= */
+
+    document
+        .querySelectorAll(
+            ".sx-filter-panel .sx-filter-group"
+        )
+        .forEach(function (group) {
+
+            group.classList.add("active");
+
+        });
+
+
+    /* =================================================
+       DEBUG
+    ================================================= */
+
+    console.log(
+        "ShopNex Filter System Loaded Successfully"
+    );
+
+});
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    
+    const slider = document.getElementById('categoriesSlider');
+    const prevBtn = document.querySelector('.category-prev');
+    const nextBtn = document.querySelector('.category-next');
+    
+    if (!slider) return; // agar slider na mile to ruk jao
+
+    const scrollAmount = 320; // 1 card + gap jitna
+
+    // RIGHT ARROW
+    nextBtn.addEventListener('click', () => {
+        slider.scrollBy({ 
+            left: scrollAmount, 
+            behavior: 'smooth' 
+        });
+    });
+
+    // LEFT ARROW
+    prevBtn.addEventListener('click', () => {
+        slider.scrollBy({ 
+            left: -scrollAmount, 
+            behavior: 'smooth' 
+        });
+    });
+
+    // Optional: Arrow hide/show jab end pe pohancho
+    function updateArrows() {
+        if (slider.scrollLeft <= 0) {
+            prevBtn.style.opacity = '0.3';
+            prevBtn.style.pointerEvents = 'none';
+        } else {
+            prevBtn.style.opacity = '1';
+            prevBtn.style.pointerEvents = 'auto';
+        }
+
+        if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 10) {
+            nextBtn.style.opacity = '0.3';
+            nextBtn.style.pointerEvents = 'none';
+        } else {
+            nextBtn.style.opacity = '1';
+            nextBtn.style.pointerEvents = 'auto';
+        }
+    }
+
+    slider.addEventListener('scroll', updateArrows);
+    updateArrows(); // page load pe 1 baar chala do
+});
+</script>
+{% endblock %}

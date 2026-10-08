@@ -1,0 +1,105 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Track Your Order - ShopNex</title>
+
+    <link rel="stylesheet" href="{% static 'css/tracking_footer.css' %}">
+
+</head>
+
+<body>
+
+    <div class="tracking-container">
+
+        <div class="tracking-card">
+ <div class="tracking-icon">
+        🚚
+    </div>
+            <h1>Track Your Order</h1>
+
+            <p class="subtitle">
+                Enter your Order ID and email address to track your order.
+            </p>
+
+            {% if messages %}
+
+                {% for message in messages %}
+
+                    <div class="message">
+                        {{ message }}
+                    </div>
+
+                {% endfor %}
+
+            {% endif %}
+
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <div class="form-group">
+
+                    <label for="order_id">
+                        Order ID
+                    </label>
+
+                    <input
+                        type="number"
+                        id="order_id"
+                        name="order_id"
+                        placeholder="Enter your Order ID"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email address"
+                        required
+                    >
+
+                </div>
+
+
+                <button type="submit">
+                    Track Order
+                </button>
+
+            </form>
+
+
+            <div class="back-link">
+
+                <a href="{% url 'home' %}">
+                    ← Back to Shop
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,902 @@
+.admin-dashboard {
+    width: 92%;
+    max-width: 1400px;
+    margin: 40px auto;
+    color: #ffffff;
+}
+
+
+/* HEADER */
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 35px;
+}
+
+.dashboard-header h1 {
+    font-size: 36px;
+    margin-bottom: 8px;
+}
+
+.dashboard-header p {
+    color: #9ca3af;
+}
+
+.django-admin-btn {
+    padding: 12px 22px;
+    border-radius: 10px;
+    text-decoration: none;
+    background: #2563eb;
+    color: white;
+    font-weight: 600;
+}
+
+
+/* STATISTICS */
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.stat-card {
+    background: #111827;
+    border: 1px solid #1f2937;
+    border-radius: 18px;
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    transition: 0.3s;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    border-color: #2563eb;
+}
+
+.stat-icon {
+    width: 55px;
+    height: 55px;
+    border-radius: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #1e3a8a;
+    font-size: 25px;
+}
+
+.stat-card span {
+    color: #9ca3af;
+    font-size: 14px;
+}
+
+.stat-card h2 {
+    margin-top: 6px;
+    font-size: 25px;
+}
+
+
+/* SECTION */
+
+.section-title {
+    margin: 45px 0 20px;
+}
+
+.section-title h2 {
+    font-size: 24px;
+}
+
+
+/* ORDER STATUS */
+
+.order-status-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 15px;
+}
+
+.status-card {
+    background: #111827;
+    border: 1px solid #1f2937;
+    border-radius: 14px;
+    padding: 20px;
+    text-align: center;
+}
+
+.status-card span {
+    display: block;
+    color: #9ca3af;
+    margin-bottom: 8px;
+}
+
+.status-card strong {
+    font-size: 28px;
+}
+
+
+/* DASHBOARD SECTION */
+
+.dashboard-section {
+    background: #111827;
+    border: 1px solid #1f2937;
+    border-radius: 18px;
+    margin-top: 30px;
+    padding: 25px;
+}
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.section-heading h2 {
+    margin-bottom: 5px;
+}
+
+.section-heading p {
+    color: #9ca3af;
+}
+
+.section-heading a {
+    color: #60a5fa;
+    text-decoration: none;
+}
+
+
+/* TABLE */
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    text-align: left;
+    color: #9ca3af;
+    font-size: 13px;
+    padding: 15px;
+    border-bottom: 1px solid #1f2937;
+}
+
+td {
+    padding: 17px 15px;
+    border-bottom: 1px solid #1f2937;
+}
+
+tr:hover {
+    background: #172033;
+}
+
+
+.order-status-control form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.status-select {
+    min-width: 130px;
+    padding: 9px 12px;
+
+    background: #0b1220;
+    color: #ffffff;
+
+    border: 1px solid #26354d;
+    border-radius: 8px;
+
+    font-size: 14px;
+    outline: none;
+
+    cursor: pointer;
+}
+
+.status-select:focus {
+    border-color: #1683ff;
+    box-shadow: 0 0 0 3px rgba(22, 131, 255, 0.15);
+}
+
+.update-status-btn {
+    padding: 9px 14px;
+
+    background: #1683ff;
+    color: white;
+
+    border: none;
+    border-radius: 8px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.25s ease;
+}
+
+.update-status-btn:hover {
+    background: #006fe6;
+    transform: translateY(-1px);
+}
+
+
+/* LOW STOCK */
+
+.low-stock-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.stock-card {
+    background: #0b1220;
+    border: 1px solid #1f2937;
+    border-radius: 14px;
+    padding: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.stock-card h3 {
+    margin-bottom: 5px;
+}
+
+.stock-card p {
+    color: #9ca3af;
+}
+
+.stock-number {
+    text-align: center;
+}
+
+.stock-number strong {
+    display: block;
+    font-size: 26px;
+    color: #f87171;
+}
+
+.stock-number span {
+    color: #9ca3af;
+    font-size: 12px;
+}
+
+.no-stock-warning {
+    color: #4ade80;
+}
+
+
+/* EMPTY */
+
+.empty {
+    text-align: center;
+    color: #9ca3af;
+    padding: 40px;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 1000px) {
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .order-status-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .admin-dashboard {
+        width: 94%;
+        margin: 25px auto;
+    }
+
+    .dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .dashboard-header h1 {
+        font-size: 28px;
+    }
+.dashboard-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .order-status-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .low-stock-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-section {
+        padding: 15px;
+    }
+
+    .section-heading {
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+}
+/* =========================
+   ANALYTICS
+========================= */
+
+.analytics-section {
+    margin-top: 35px;
+}
+
+.analytics-header {
+    margin-bottom: 20px;
+}
+
+.analytics-header h2 {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.analytics-header p {
+    color: #9ca3af;
+}
+
+
+/* CHART GRID */
+
+.charts-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+
+/* CHART CARD */
+
+.chart-card {
+    background: #111827;
+    border: 1px solid #1f2937;
+    border-radius: 18px;
+    padding: 25px;
+}
+
+.chart-card h3 {
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+
+/* CHART CONTAINER */
+
+.chart-container {
+    position: relative;
+    width: 100%;
+    height: 300px;
+}
+
+
+/* STATUS */
+
+.status-chart-card {
+    margin-top: 20px;
+}
+
+.status-chart-container {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    height: 350px;
+    margin: auto;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 800px) {
+
+    .charts-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .chart-card {
+        padding: 15px;
+    }
+
+    .chart-container {
+        height: 250px;
+    }
+
+    .status-chart-container {
+        height: 280px;
+    }
+
+}
+/* =========================================
+   ORDER STATUS UPDATE
+========================================= */
+
+.order-status-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+}
+
+/* Status dropdown */
+.order-status-form select {
+    appearance: none;
+    -webkit-appearance: none;
+
+    min-width: 140px;
+    padding: 10px 38px 10px 14px;
+
+    background-color: #0d1525;
+    color: #ffffff;
+
+    border: 1px solid #263653;
+    border-radius: 10px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+    outline: none;
+
+    transition: all 0.25s ease;
+
+    background-image:
+        linear-gradient(45deg, transparent 50%, #1683ff 50%),
+        linear-gradient(135deg, #1683ff 50%, transparent 50%);
+    background-position:
+        calc(100% - 18px) 50%,
+        calc(100% - 12px) 50%;
+    background-size:
+        6px 6px,
+        6px 6px;
+    background-repeat: no-repeat;
+}
+
+/* Dropdown hover */
+.order-status-form select:hover {
+    border-color: #1683ff;
+    background-color: #111c30;
+}
+
+/* Dropdown focus */
+.order-status-form select:focus {
+    border-color: #1683ff;
+    box-shadow: 0 0 0 3px rgba(22, 131, 255, 0.15);
+}
+
+/* Dropdown options */
+.order-status-form select option {
+    background: #0d1525;
+    color: #ffffff;
+}
+
+
+/* =========================================
+   UPDATE BUTTON
+========================================= */
+
+.update-status-btn {
+    border: none;
+    padding: 10px 16px;
+
+    border-radius: 10px;
+
+    background: linear-gradient(
+        135deg,
+        #087cff,
+        #0057d9
+    );
+
+    color: #ffffff;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.update-status-btn:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 20px rgba(0, 119, 255, 0.25);
+}
+
+.update-status-btn:active {
+    transform: translateY(0);
+}
+
+
+/* =========================================
+   ACTION COLUMN
+========================================= */
+
+.orders-table td:last-child {
+    white-space: nowrap;
+}
+
+.orders-table th:last-child {
+    text-align: center;
+}
+
+.orders-table td:last-child {
+    text-align: center;
+}
+/* =========================================
+   ORDER STATUS UPDATE
+========================================= */
+
+.order-status-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+}
+
+/* Status dropdown */
+.order-status-form select {
+    appearance: none;
+    -webkit-appearance: none;
+
+    min-width: 140px;
+    padding: 10px 38px 10px 14px;
+
+    background-color: #0d1525;
+    color: #ffffff;
+
+    border: 1px solid #263653;
+    border-radius: 10px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+    outline: none;
+
+    transition: all 0.25s ease;
+
+    background-image:
+        linear-gradient(45deg, transparent 50%, #1683ff 50%),
+        linear-gradient(135deg, #1683ff 50%, transparent 50%);
+    background-position:
+        calc(100% - 18px) 50%,
+        calc(100% - 12px) 50%;
+    background-size:
+        6px 6px,
+        6px 6px;
+    background-repeat: no-repeat;
+}
+
+/* Dropdown hover */
+.order-status-form select:hover {
+    border-color: #1683ff;
+    background-color: #111c30;
+}
+
+/* Dropdown focus */
+.order-status-form select:focus {
+    border-color: #1683ff;
+    box-shadow: 0 0 0 3px rgba(22, 131, 255, 0.15);
+}
+
+/* Dropdown options */
+.order-status-form select option {
+    background: #0d1525;
+    color: #ffffff;
+}
+
+
+/* =========================================
+   UPDATE BUTTON
+========================================= */
+
+.update-status-btn {
+    border: none;
+    padding: 10px 16px;
+
+    border-radius: 10px;
+
+    background: linear-gradient(
+        135deg,
+        #087cff,
+        #0057d9
+    );
+
+    color: #ffffff;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.update-status-btn:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 20px rgba(0, 119, 255, 0.25);
+}
+
+.update-status-btn:active {
+    transform: translateY(0);
+}
+
+
+/* =========================================
+   ACTION COLUMN
+========================================= */
+
+.orders-table td:last-child {
+    white-space: nowrap;
+}
+
+.orders-table th:last-child {
+    text-align: center;
+}
+
+.orders-table td:last-child {
+    text-align: center;
+}
+/* ==========================================
+   ORDERS TABLE
+========================================== */
+
+.orders-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.orders-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.orders-table th,
+.orders-table td {
+    padding: 18px 15px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.orders-table th {
+    color: #8fa3bf;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.orders-table td {
+    color: #ffffff;
+    border-top: 1px solid #202c3d;
+}
+
+.orders-table tbody tr {
+    transition: background 0.2s ease;
+}
+
+.orders-table tbody tr:hover {
+    background: rgba(22, 131, 255, 0.04);
+}
+
+
+/* ==========================================
+   STATUS UPDATE FORM
+========================================== */
+
+.order-status-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 0;
+}
+
+
+/* DROPDOWN */
+
+.status-select {
+    width: 135px;
+    height: 40px;
+
+    padding: 0 35px 0 12px;
+
+    border: 1px solid #263653;
+    border-radius: 8px;
+
+    background-color: #0b1424;
+    color: #ffffff;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+    outline: none;
+}
+
+.status-select:hover {
+    border-color: #1683ff;
+}
+
+.status-select:focus {
+    border-color: #1683ff;
+    box-shadow: 0 0 0 3px rgba(22, 131, 255, 0.12);
+}
+
+.status-select option {
+    background: #0b1424;
+    color: #ffffff;
+}
+
+
+/* UPDATE BUTTON */
+
+.update-status-btn {
+    height: 40px;
+
+    padding: 0 15px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: #087cff;
+    color: white;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.update-status-btn:hover {
+    background: #0068df;
+    transform: translateY(-1px);
+    box-shadow: 0 5px 15px rgba(8, 124, 255, 0.25);
+}
+
+.update-status-btn:active {
+    transform: translateY(0);
+}
+/* =========================================
+   ORDER ACTION
+========================================= */
+
+.action-cell {
+    min-width: 230px;
+}
+
+.order-status-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 0;
+}
+
+
+/* STATUS SELECT */
+
+.status-select {
+    width: 125px;
+    height: 40px;
+
+    padding: 0 12px;
+
+    background: #0b1424;
+    color: #ffffff;
+
+    border: 1px solid #263653;
+    border-radius: 8px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    outline: none;
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.status-select:hover {
+    border-color: #1683ff;
+}
+
+.status-select:focus {
+    border-color: #1683ff;
+    box-shadow: 0 0 0 3px rgba(22, 131, 255, 0.15);
+}
+
+.status-select option {
+    background: #0b1424;
+    color: #ffffff;
+}
+
+
+/* UPDATE BUTTON */
+
+.update-status-btn {
+    height: 40px;
+
+    padding: 0 14px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: linear-gradient(
+        135deg,
+        #1683ff,
+        #0066d6
+    );
+
+    color: #ffffff;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+
+    transition: all 0.2s ease;
+}
+
+.update-status-btn:hover {
+    background: linear-gradient(
+        135deg,
+        #2990ff,
+        #0874e8
+    );
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 6px 18px rgba(22, 131, 255, 0.25);
+}
+
+.update-status-btn:active {
+    transform: translateY(0);
+}

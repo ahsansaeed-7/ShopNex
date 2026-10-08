@@ -1,0 +1,35 @@
+.error-page {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 5%;
+    text-align: center;
+}
+
+.error-content span {
+    font-size: 100px;
+    font-weight: 800;
+    color: #00aaff;
+}
+
+.error-content h1 {
+    font-size: 38px;
+    margin: 10px 0;
+}
+
+.error-content p {
+    opacity: .65;
+    max-width: 500px;
+    margin: 0 auto 25px;
+}
+
+.error-content a {
+    display: inline-block;
+    padding: 13px 25px;
+    border-radius: 30px;
+    background: #00aaff;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+}

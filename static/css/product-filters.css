@@ -1,0 +1,985 @@
+/* =========================================================
+   SHOPNEX FILTER + SORT
+   COMPLETE FIXED VERSION
+========================================================= */
+
+
+/* =========================================================
+   SHOP CONTROLS
+========================================================= */
+
+.sx-shop-controls {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin: 30px 0;
+    padding: 0 5px;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   FILTER BUTTON
+========================================================= */
+
+.sx-filter-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    height: 46px;
+
+    padding: 0 22px;
+
+    background: #111 !important;
+    color: #fff !important;
+
+    border: 1px solid #111 !important;
+
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    cursor: pointer;
+
+    transition: all 0.3s ease;
+}
+
+
+.sx-filter-btn:hover {
+    background: #333 !important;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   SORT
+========================================================= */
+
+.sx-sort-box {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+}
+
+
+.sx-sort-box label {
+    color: #777 !important;
+
+    font-size: 13px;
+
+    font-weight: 500;
+}
+
+
+.sx-sort-box select {
+    width: 200px;
+
+    height: 46px;
+
+    padding: 0 14px;
+
+    background: #060606 !important;
+    color: #ece6e6 !important;
+
+    border: 1px solid #ddd !important;
+
+    outline: none;
+
+    font-family: inherit;
+    font-size: 13px;
+
+    cursor: pointer;
+}
+
+
+.sx-sort-box select option {
+    background: #161616 !important;
+    color: #f5f0f0 !important;
+}
+
+
+.sx-sort-box select:focus {
+    border-color: #111 !important;
+}
+
+
+/* =========================================================
+   FILTER OVERLAY
+========================================================= */
+
+.sx-filter-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100vh;
+
+    background: rgba(0, 0, 0, 0.65) !important;
+
+    z-index: 99990;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.35s ease,
+        visibility 0.35s ease;
+}
+
+
+/* OPEN */
+
+.sx-filter-overlay.active {
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
+}
+
+
+/* =========================================================
+   FILTER PANEL
+========================================================= */
+
+.sx-filter-panel {
+    position: fixed !important;
+
+    top: 0 !important;
+    left: 0 !important;
+
+    width: 390px;
+
+    max-width: 90vw;
+
+    height: 100vh;
+
+    padding: 30px;
+
+    box-sizing: border-box;
+
+    background: #fff !important;
+
+    color: #111 !important;
+
+    z-index: 99999;
+
+    overflow-x: hidden;
+
+    overflow-y: auto;
+
+    transform: translateX(-110%);
+
+    transition:
+        transform 0.45s cubic-bezier(
+            0.77,
+            0,
+            0.18,
+            1
+        );
+
+    box-shadow:
+        10px 0 45px rgba(0, 0, 0, 0.25);
+
+    opacity: 1 !important;
+
+    visibility: visible !important;
+}
+
+
+/* OPEN PANEL */
+
+.sx-filter-panel.active {
+    transform: translateX(0) !important;
+}
+
+
+/* =========================================================
+   PANEL SCROLLBAR
+========================================================= */
+
+.sx-filter-panel::-webkit-scrollbar {
+    width: 6px;
+}
+
+
+.sx-filter-panel::-webkit-scrollbar-track {
+    background: #f5f5f5;
+}
+
+
+.sx-filter-panel::-webkit-scrollbar-thumb {
+    background: #bbb;
+
+    border-radius: 10px;
+}
+
+
+/* =========================================================
+   FILTER HEADER
+========================================================= */
+
+.sx-filter-header {
+    width: 100%;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    padding-bottom: 22px;
+
+    border-bottom: 1px solid #e8e8e8;
+}
+
+
+.sx-filter-header > div {
+    display: block;
+}
+
+
+.sx-filter-header span {
+    display: block !important;
+
+    margin-bottom: 5px;
+
+    color: #999 !important;
+
+    font-size: 10px !important;
+
+    font-weight: 700 !important;
+
+    letter-spacing: 3px !important;
+}
+
+
+.sx-filter-header h3 {
+    margin: 0 !important;
+
+    color: #111 !important;
+
+    font-size: 26px !important;
+
+    line-height: 1.2;
+
+    font-weight: 600 !important;
+}
+
+
+/* =========================================================
+   CLOSE BUTTON
+========================================================= */
+
+.sx-filter-header button {
+    width: 40px;
+    height: 40px;
+
+    min-width: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    background: #c00c0c !important;
+
+    color: #111 !important;
+
+    border: 1px solid #ddd !important;
+
+    border-radius: 2px;
+
+    cursor: pointer;
+
+    font-size: 19px;
+
+    transition: all 0.3s ease;
+}
+
+
+.sx-filter-header button:hover {
+    background: #111 !important;
+
+    color: #fff !important;
+
+    border-color: #111 !important;
+}
+
+
+/* =========================================================
+   FILTER HEADING
+========================================================= */
+
+.sx-filter-heading {
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 23px 0;
+
+    box-sizing: border-box;
+}
+
+
+.sx-filter-heading h3 {
+    margin: 0 !important;
+
+    color: #111 !important;
+
+    font-size: 13px !important;
+
+    font-weight: 700 !important;
+
+    letter-spacing: 2px;
+}
+
+
+.sx-filter-heading a {
+    color: #666 !important;
+
+    font-size: 12px !important;
+
+    text-decoration: underline;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   FILTER GROUP
+========================================================= */
+
+.sx-filter-group {
+    width: 100%;
+
+    padding: 20px 0;
+
+    box-sizing: border-box;
+
+    border-top: 1px solid #eeeeee;
+
+    display: block !important;
+
+    visibility: visible !important;
+
+    opacity: 1 !important;
+}
+
+
+/* =========================================================
+   FILTER TITLE
+========================================================= */
+
+.sx-filter-title {
+    width: 100%;
+
+    min-height: 25px;
+
+    display: flex !important;
+
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 !important;
+
+    margin: 0 !important;
+
+    background: transparent !important;
+
+    color: #111 !important;
+
+    border: none !important;
+
+    outline: none;
+
+    font-family: inherit;
+
+    font-size: 15px !important;
+
+    font-weight: 600 !important;
+
+    line-height: 1.4;
+
+    cursor: pointer;
+
+    text-align: left;
+}
+
+
+.sx-filter-title span {
+    color: #111 !important;
+
+    font-size: 15px !important;
+
+    font-weight: 600 !important;
+}
+
+
+.sx-filter-title i {
+    color: #111 !important;
+
+    font-size: 11px !important;
+
+    transition: transform 0.3s ease;
+}
+
+
+/* =========================================================
+   FILTER OPTIONS
+========================================================= */
+
+.sx-filter-options {
+    width: 100%;
+
+    display: block !important;
+
+    margin-top: 16px;
+
+    visibility: visible !important;
+
+    opacity: 1 !important;
+
+    color: #111 !important;
+}
+
+
+/* =========================================================
+   CHECKBOX LABEL
+========================================================= */
+
+.sx-check {
+    width: 100%;
+
+    display: flex !important;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin: 0 0 13px 0;
+
+    padding: 0;
+
+    color: #444 !important;
+
+    font-size: 13px !important;
+
+    font-weight: 400 !important;
+
+    line-height: 1.4;
+
+    cursor: pointer;
+
+    visibility: visible !important;
+
+    opacity: 1 !important;
+}
+
+
+.sx-check span {
+    color: #444 !important;
+
+    font-size: 13px !important;
+
+    visibility: visible !important;
+
+    opacity: 1 !important;
+}
+
+
+/* =========================================================
+   CHECKBOX INPUT
+========================================================= */
+
+.sx-filter-panel .sx-check input[type="checkbox"] {
+    width: 17px !important;
+
+    height: 17px !important;
+
+    min-width: 17px !important;
+
+    min-height: 17px !important;
+
+    display: inline-block !important;
+
+    margin: 0 !important;
+
+    padding: 0 !important;
+
+    opacity: 1 !important;
+
+    visibility: visible !important;
+
+    appearance: auto !important;
+
+    -webkit-appearance: checkbox !important;
+
+    accent-color: #111;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   PRICE LABELS
+========================================================= */
+
+.sx-price-labels {
+    width: 100%;
+
+    display: flex !important;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin: 18px 0 10px;
+
+    color: #777 !important;
+
+    font-size: 11px !important;
+}
+
+
+.sx-price-labels span {
+    color: #777 !important;
+
+    font-size: 11px !important;
+}
+
+
+/* =========================================================
+   PRICE SLIDER
+========================================================= */
+
+.sx-price-slider {
+    position: relative;
+
+    width: 100%;
+
+    margin: 10px 0 15px;
+
+    display: block !important;
+
+    visibility: visible !important;
+
+    opacity: 1 !important;
+}
+
+
+.sx-price-slider input[type="range"] {
+    width: 100% !important;
+
+    height: 5px !important;
+
+    display: block !important;
+
+    margin: 8px 0 !important;
+
+    padding: 0 !important;
+
+    appearance: auto !important;
+
+    -webkit-appearance: auto !important;
+
+    opacity: 1 !important;
+
+    visibility: visible !important;
+
+    accent-color: #1677ff;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   PRICE INPUTS
+========================================================= */
+
+.sx-price-inputs {
+    width: 100%;
+
+    display: flex !important;
+
+    gap: 10px;
+
+    margin-top: 15px;
+
+    visibility: visible !important;
+}
+
+
+.sx-price-inputs input[type="number"] {
+    width: 50% !important;
+
+    height: 42px !important;
+
+    box-sizing: border-box;
+
+    padding: 0 10px !important;
+
+    background: #f8f8f8 !important;
+
+    color: #111 !important;
+
+    border: 1px solid #ddd !important;
+
+    outline: none;
+
+    font-family: inherit;
+
+    font-size: 13px !important;
+
+    opacity: 1 !important;
+
+    visibility: visible !important;
+}
+
+
+.sx-price-inputs input[type="number"]:focus {
+    border-color: #111 !important;
+
+    background: #fff !important;
+}
+
+
+/* =========================================================
+   RATING
+========================================================= */
+
+.sx-rating-options {
+    width: 100%;
+
+    display: block !important;
+
+    margin-top: 16px;
+
+    color: #111 !important;
+
+    visibility: visible !important;
+
+    opacity: 1 !important;
+}
+
+
+.sx-rating-options label {
+    width: 100%;
+
+    display: flex !important;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin: 0 0 13px;
+
+    color: #444 !important;
+
+    font-size: 13px;
+
+    cursor: pointer;
+
+    visibility: visible !important;
+
+    opacity: 1 !important;
+}
+
+
+.sx-rating-options input[type="checkbox"] {
+    width: 17px !important;
+
+    height: 17px !important;
+
+    margin: 0;
+
+    accent-color: #111;
+
+    appearance: auto !important;
+
+    -webkit-appearance: checkbox !important;
+
+    cursor: pointer;
+}
+
+
+.sx-stars {
+    color: #f0a500 !important;
+
+    font-size: 14px !important;
+
+    letter-spacing: 2px;
+}
+
+
+.sx-rating-options small {
+    color: #777 !important;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   COLORS
+========================================================= */
+
+.sx-colors {
+    width: 100%;
+
+    display: flex !important;
+
+    flex-wrap: wrap;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-top: 17px;
+
+    visibility: visible !important;
+
+    opacity: 1 !important;
+}
+
+
+.sx-color {
+    width: 32px !important;
+
+    height: 32px !important;
+
+    min-width: 32px !important;
+
+    padding: 0 !important;
+
+    border-radius: 50% !important;
+
+    border: 2px solid #ddd !important;
+
+    outline: none;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+
+.sx-color:hover {
+    transform: scale(1.12);
+}
+
+
+.sx-white {
+    background: #fff !important;
+}
+
+
+.sx-black {
+    background: #111 !important;
+}
+
+
+.sx-gold {
+    background: #d4af37 !important;
+}
+
+
+.sx-silver {
+    background: #c0c0c0 !important;
+}
+
+
+.sx-blue {
+    background: #315b9c !important;
+}
+
+
+/* =========================================================
+   MORE COLORS
+========================================================= */
+
+.sx-more-color {
+    padding: 0;
+
+    background: transparent !important;
+
+    color: #555 !important;
+
+    border: none !important;
+
+    font-size: 12px;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   AVAILABILITY
+========================================================= */
+
+.sx-filter-group > .sx-check {
+    margin-top: 14px;
+}
+
+
+/* =========================================================
+   APPLY BUTTON
+========================================================= */
+
+.sx-apply-btn {
+    width: 100% !important;
+
+    height: 50px;
+
+    display: block;
+
+    margin-top: 20px;
+
+    background: #111 !important;
+
+    color: #fff !important;
+
+    border: none !important;
+
+    outline: none;
+
+    font-family: inherit;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+
+    cursor: pointer;
+
+    transition: all 0.3s ease;
+}
+
+
+.sx-apply-btn:hover {
+    background: #333 !important;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   EMPTY MESSAGE
+========================================================= */
+
+.sx-filter-panel .sx-empty {
+    color: #999 !important;
+
+    font-size: 12px;
+
+    margin: 12px 0;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .sx-shop-controls {
+        margin: 20px 0;
+
+        padding: 0;
+
+        gap: 12px;
+    }
+
+
+    .sx-filter-btn {
+        height: 44px;
+
+        padding: 0 17px;
+
+        font-size: 11px;
+    }
+
+
+    .sx-sort-box label {
+        display: none;
+    }
+
+
+    .sx-sort-box select {
+        width: 160px;
+
+        height: 44px;
+
+        font-size: 12px;
+    }
+
+
+    .sx-filter-panel {
+        width: 350px;
+
+        max-width: 88vw;
+
+        padding: 25px 22px;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+    .sx-shop-controls {
+        width: 100%;
+
+        gap: 8px;
+    }
+
+
+    .sx-filter-btn {
+        flex: 1;
+
+        padding: 0 12px;
+    }
+
+
+    .sx-sort-box {
+        flex: 1;
+    }
+
+
+    .sx-sort-box select {
+        width: 100%;
+
+        max-width: none;
+    }
+
+
+    .sx-filter-panel {
+        width: 320px;
+
+        max-width: 90vw;
+
+        padding: 22px 18px;
+    }
+
+}

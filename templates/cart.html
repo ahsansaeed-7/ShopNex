@@ -1,0 +1,781 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<section class="cart-section">
+
+    <div class="cart-container">
+<div class="breadcrumb">
+    <a href="{% url 'home' %}">HOME</a>
+    <span>/</span>
+    <span>CART</span>
+</div>
+        <!-- HEADER -->
+
+        <div class="cart-header">
+
+            <span>SHOPNEX CART</span>
+
+            <h1>Your Shopping Cart</h1>
+
+            <p>
+                Review your products before proceeding to checkout.
+            </p>
+
+        </div>
+
+
+        {% if cart_items %}
+
+        <div class="cart-layout">
+
+
+            <!-- =====================================
+                 CART PRODUCTS
+            ====================================== -->
+
+            <div class="cart-products">
+
+                {% for item in cart_items %}
+
+                <div class="cart-item">
+
+                    <!-- PRODUCT IMAGE -->
+
+                    <div class="cart-image">
+
+                        {% if item.product.image %}
+
+                            <img
+                                src="{{ item.product.image.url }}"
+                                alt="{{ item.product.name }}"
+                            >
+
+                        {% else %}
+
+                            <div class="no-image">
+                                No Image
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <!-- PRODUCT INFO -->
+
+                    <div class="cart-product-info">
+
+                        <h2>
+                            {{ item.product.name }}
+                        </h2>
+
+                        {% if item.product.category %}
+
+                        <span class="cart-category">
+                            {{ item.product.category.name }}
+                        </span>
+
+                        {% endif %}
+
+                        <p class="cart-price">
+
+                             Rs. {{ item.product.final_price|floatformat:2 }}
+
+                        </p>
+
+                    </div>
+
+
+                    <!-- QUANTITY -->
+                    <div class="cart-quantity">
+
+    <span>
+        Quantity
+    </span>
+
+    <div class="quantity-control">
+
+        <a
+            href="{% url 'decrease_cart' item.id %}"
+            class="quantity-btn"
+        >
+            −
+        </a>
+
+        <strong>
+            {{ item.quantity }}
+        </strong>
+
+        <a
+            href="{% url 'increase_cart' item.id %}"
+            class="quantity-btn"
+        >
+            +
+        </a>
+
+    </div>
+
+</div>
+
+
+                    <!-- TOTAL -->
+
+                    <div class="cart-item-total">
+
+                        <span>
+                            Total
+                        </span>
+
+                         <strong id="item-total-{{ item.id }}">
+                           Rs. {{ item.item_total|floatformat:2 }}
+                         </strong>
+                    </div>
+
+
+                    <!-- REMOVE -->
+
+                    <form
+                        method="POST"
+                        action="{% url 'remove_from_cart' item.id %}"
+                    >
+
+                        {% csrf_token %}
+
+                        <button
+                            type="submit"
+                            class="remove-cart-btn"
+                            title="Remove product"
+                        >
+
+                            <i class="fa-solid fa-trash"></i>
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+<div class="shipping-progress">
+
+    <div class="shipping-progress-text">
+
+        <i class="fa-solid fa-truck"></i>
+
+        <span id="shipping-message">
+            Free shipping on your order
+        </span>
+
+    </div>
+
+
+    <div class="progress-bar">
+
+        <div
+            class="progress-fill"
+            id="shipping-progress"
+        ></div>
+
+    </div>
+
+</div>
+            <!-- =====================================
+                 CART SUMMARY
+            ====================================== -->
+
+            <aside class="cart-summary">
+
+                <h2>
+                    Cart Summary
+                </h2>
+
+
+                <div class="summary-row">
+
+                    <span>
+                        Items
+                    </span>
+
+                    <strong>
+                        {{ cart_items|length }}
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-row">
+
+                    <span>
+                        Subtotal
+                    </span>
+
+                    <strong>
+                        Rs. {{ total }}
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-row">
+
+                    <span>
+                        Shipping
+                    </span>
+
+                    <strong class="free">
+                        FREE
+                    </strong>
+
+                </div>
+
+
+                <div class="cart-total">
+
+                    <span>
+                        Total
+                    </span>
+
+                    <strong>
+                        Rs. {{ total }}
+                    </strong>
+
+                </div>
+
+
+                <!-- CHECKOUT -->
+
+                <a
+                    href="{% url 'checkout' %}"
+                    class="checkout-btn"
+                >
+
+                    <i class="fa-solid fa-lock"></i>
+
+                    Proceed to Checkout
+
+                </a>
+
+
+                <a
+                    href="{% url 'home' %}"
+                    class="continue-shopping"
+                >
+
+                    <i class="fa-solid fa-arrow-left"></i>
+
+                    Continue Shopping
+
+                </a>
+
+            </aside>
+
+        </div>
+
+
+        {% else %}
+
+
+        <!-- =====================================
+             EMPTY CART
+        ====================================== -->
+
+        <div class="empty-cart">
+
+            <div class="empty-cart-icon">
+
+                <i class="fa-solid fa-cart-shopping"></i>
+
+            </div>
+
+            <h2>
+                Your cart is empty
+            </h2>
+
+            <p>
+                Looks like you haven't added anything yet.
+            </p>
+
+            <a
+                href="{% url 'home' %}"
+                class="checkout-btn"
+            >
+
+                Start Shopping
+
+            </a>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+
+        // =====================================
+        // GET CSRF TOKEN
+        // =====================================
+
+        function getCSRFToken() {
+
+            const csrfInput =
+                document.querySelector(
+                    "[name=csrfmiddlewaretoken]"
+                );
+
+            if (csrfInput) {
+                return csrfInput.value;
+            }
+
+            return "";
+        }
+
+
+        // =====================================
+        // UPDATE TOTAL
+        // =====================================
+
+        function updateTotal(total) {
+
+            const formattedTotal =
+                "Rs. " +
+                Number(total).toLocaleString(
+                    "en-PK",
+                    {
+                        minimumFractionDigits: 2
+                    }
+                );
+
+
+            const cartTotal =
+                document.getElementById(
+                    "cart-total"
+                );
+
+            const summaryTotal =
+                document.getElementById(
+                    "summary-total"
+                );
+
+
+            if (cartTotal) {
+                cartTotal.textContent =
+                    formattedTotal;
+            }
+
+
+            if (summaryTotal) {
+                summaryTotal.textContent =
+                    formattedTotal;
+            }
+
+        }
+
+
+        // =====================================
+        // UPDATE ITEM TOTAL
+        // =====================================
+
+        function updateItemTotal(
+            itemId,
+            total
+        ) {
+
+            const element =
+                document.getElementById(
+                    "item-total-" + itemId
+                );
+
+
+            if (!element) {
+                return;
+            }
+
+
+            element.textContent =
+                "Rs. " +
+                Number(total).toLocaleString(
+                    "en-PK",
+                    {
+                        minimumFractionDigits: 2
+                    }
+                );
+
+        }
+
+
+        // =====================================
+        // INCREASE
+        // =====================================
+
+        document
+            .querySelectorAll(".increase-btn")
+            .forEach(
+                function (button) {
+
+                    button.addEventListener(
+                        "click",
+                        function () {
+
+                            const itemId =
+                                this.dataset.id;
+
+
+                            fetch(
+                                `/cart/increase/${itemId}/`,
+                                {
+                                    method: "POST",
+
+                                    headers: {
+
+                                        "X-CSRFToken":
+                                            getCSRFToken(),
+
+                                        "X-Requested-With":
+                                            "XMLHttpRequest"
+                                    }
+                                }
+                            )
+
+                            .then(
+                                response =>
+                                    response.json()
+                            )
+
+                            .then(
+                                data => {
+
+                                    if (!data.success) {
+
+                                        alert(
+                                            data.message
+                                        );
+
+                                        return;
+                                    }
+
+
+                                    if (data.deleted) {
+
+                                        removeItemFromPage(
+                                            itemId
+                                        );
+
+                                        return;
+                                    }
+
+
+                                    const quantity =
+                                        document.getElementById(
+                                            "quantity-" +
+                                            itemId
+                                        );
+
+
+                                    if (quantity) {
+
+                                        quantity.textContent =
+                                            data.quantity;
+
+                                    }
+
+
+                                    updateItemTotal(
+                                        itemId,
+                                        data.item_total
+                                    );
+
+
+                                    updateTotal(
+                                        data.cart_total
+                                    );
+
+                                }
+                            )
+
+                            .catch(
+                                error => {
+
+                                    console.error(
+                                        "Cart error:",
+                                        error
+                                    );
+
+                                }
+                            );
+
+                        }
+                    );
+
+                }
+            );
+
+
+        // =====================================
+        // DECREASE
+        // =====================================
+
+        document
+            .querySelectorAll(".decrease-btn")
+            .forEach(
+                function (button) {
+
+                    button.addEventListener(
+                        "click",
+                        function () {
+
+                            const itemId =
+                                this.dataset.id;
+
+
+                            fetch(
+                                `/cart/decrease/${itemId}/`,
+                                {
+                                    method: "POST",
+
+                                    headers: {
+
+                                        "X-CSRFToken":
+                                            getCSRFToken(),
+
+                                        "X-Requested-With":
+                                            "XMLHttpRequest"
+                                    }
+                                }
+                            )
+
+                            .then(
+                                response =>
+                                    response.json()
+                            )
+
+                            .then(
+                                data => {
+
+                                    if (!data.success) {
+                                        return;
+                                    }
+
+
+                                    if (data.deleted) {
+
+                                        removeItemFromPage(
+                                            itemId
+                                        );
+
+                                        updateTotal(
+                                            data.cart_total
+                                        );
+
+                                        return;
+                                    }
+
+
+                                    const quantity =
+                                        document.getElementById(
+                                            "quantity-" +
+                                            itemId
+                                        );
+
+
+                                    if (quantity) {
+
+                                        quantity.textContent =
+                                            data.quantity;
+
+                                    }
+
+
+                                    updateItemTotal(
+                                        itemId,
+                                        data.item_total
+                                    );
+
+
+                                    updateTotal(
+                                        data.cart_total
+                                    );
+
+                                }
+                            )
+
+                            .catch(
+                                error => {
+
+                                    console.error(
+                                        "Cart error:",
+                                        error
+                                    );
+
+                                }
+                            );
+
+                        }
+                    );
+
+                }
+            );
+
+
+        // =====================================
+        // REMOVE ITEM
+        // =====================================
+
+        document
+            .querySelectorAll(".remove-cart-btn")
+            .forEach(
+                function (button) {
+
+                    button.addEventListener(
+                        "click",
+                        function () {
+
+                            const itemId =
+                                this.dataset.id;
+
+
+                            if (
+                                !confirm(
+                                    "Remove this product from your cart?"
+                                )
+                            ) {
+                                return;
+                            }
+
+
+                            fetch(
+                                `/cart/remove/${itemId}/`,
+                                {
+                                    method: "POST",
+
+                                    headers: {
+
+                                        "X-CSRFToken":
+                                            getCSRFToken(),
+
+                                        "X-Requested-With":
+                                            "XMLHttpRequest"
+                                    }
+                                }
+                            )
+
+                            .then(
+                                response =>
+                                    response.json()
+                            )
+
+                            .then(
+                                data => {
+
+                                    if (!data.success) {
+                                        return;
+                                    }
+
+
+                                    removeItemFromPage(
+                                        itemId
+                                    );
+
+
+                                    updateTotal(
+                                        data.cart_total
+                                    );
+
+                                }
+                            )
+
+                            .catch(
+                                error => {
+
+                                    console.error(
+                                        "Remove error:",
+                                        error
+                                    );
+
+                                }
+                            );
+
+                        }
+                    );
+
+                }
+            );
+
+
+        // =====================================
+        // REMOVE FROM DOM
+        // =====================================
+
+        function removeItemFromPage(
+            itemId
+        ) {
+
+            const item =
+                document.getElementById(
+                    "cart-item-" + itemId
+                );
+
+
+            if (item) {
+
+                item.style.opacity = "0";
+
+                item.style.transform =
+                    "translateX(30px)";
+
+
+                setTimeout(
+                    function () {
+
+                        item.remove();
+
+
+                        checkEmptyCart();
+
+                    },
+                    250
+                );
+
+            }
+
+        }
+
+
+        // =====================================
+        // CHECK EMPTY CART
+        // =====================================
+
+        function checkEmptyCart() {
+
+            const items =
+                document.querySelectorAll(
+                    ".cart-item"
+                );
+
+
+            if (items.length === 0) {
+
+                location.reload();
+
+            }
+
+        }
+
+
+    }
+);
+
+</script>
+{% endblock %}
