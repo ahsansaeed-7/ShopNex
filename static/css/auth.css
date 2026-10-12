@@ -994,10 +994,9 @@ body {
             rgba(5, 7, 13, 0.88),
             rgba(7, 17, 38, 0.82)
         ),
-        url("/static/images/shopnex-auth.jpg");
+       
 
-    background-size: cover;
-    background-position: center;
+    
 }
 
 

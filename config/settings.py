@@ -140,14 +140,34 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
+
+
+
 STORAGES = {
     "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
+        "BACKEND": "storages.backends.s3.S3Storage",
+        "OPTIONS": {
+            "access_key": os.environ.get("SUPABASE_S3_ACCESS_KEY_ID"),
+            "secret_key": os.environ.get("SUPABASE_S3_SECRET_ACCESS_KEY"),
+            "bucket_name": os.environ.get(
+                "SUPABASE_STORAGE_BUCKET", "products"
+            ),
+            "endpoint_url": os.environ.get("SUPABASE_S3_ENDPOINT_URL"),
+            "region_name": "ap-southeast-1",
+            "addressing_style": "path",
+            "querystring_auth": False,
+            "custom_domain": (
+                "ymtdfgylynsihmhbioyl.supabase.co/"
+                "storage/v1/object/public/products"
+            ),
+            "url_protocol": "https:",
+        },
     },
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
