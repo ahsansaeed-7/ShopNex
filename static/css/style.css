@@ -8192,9 +8192,9 @@ footer {
 .footer-newsletter-form input[type="email"] {
     display: block;
     width: 100%;
-    max-width: 100%;
+    max-width: 100% ;
     min-width: 0;
-    height: 52px;
+    height: 80px;
 
     margin: 0;
     padding: 0 16px;
@@ -8291,7 +8291,7 @@ footer {
 
     .footer-newsletter-form input[type="email"],
     .footer-newsletter-form button {
-        height: 48px;
+        height: 48px !important;
     }
 }
 /* =========================================
@@ -8778,83 +8778,55 @@ color: #080808;
 /* =========================================================
    NEWSLETTER FORM
 ========================================================= */
-
+/* Newsletter Form */
 .footer-newsletter-form {
-
-    width: 375px;
-
-    height: 40px;
-
     display: flex;
-
-    align-items: stretch;
-
-    background: #0c111c;
-
-    border: 1px solid rgba(255,255,255,0.10);
-
-    border-radius: 5px;
-
-    overflow: hidden;
-
-    transition: 0.25s ease;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 480px;
+    margin-top: 18px;
 }
 
-
-.footer-newsletter-form:focus-within {
-
-    border-color: #3b82f6;
-
-    box-shadow:
-        0 0 0 3px rgba(59,130,246,0.10);
-}
-
-
+/* Email Input */
 .footer-newsletter-form input {
-
     flex: 1;
-
     min-width: 0;
-
-    padding: 0 15px;
-
-    border: none;
-
-    outline: none;
-
-    background: transparent;
-
+    height: 90px!important;
+    padding: 0 16px;
+    font-size: 14px;
+    font-family: inherit;
     color: #ffffff;
-
-    font-size: 11px;
+    background: #111827;
+    border: 1px solid #374151;
+    border-radius: 6px;
+    outline: none;
+    transition: all 0.3s ease;
 }
-
 
 .footer-newsletter-form input::placeholder {
-
-    color: #69758a;
+    color: #9ca3af;
 }
 
+.footer-newsletter-form input:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
 
+/* Subscribe Button */
 .footer-newsletter-form button {
-
-    width: 125px;
-
+    height: 48px;
+    padding: 0 22px;
+    background: #2563eb;
+    color: #ffffff;
     border: none;
-
-    background: #ffffff;
-
-    color: #080b12;
-
-    font-size: 10px;
-
-    font-weight: 800;
-
-    letter-spacing: 0.5px;
-
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
     cursor: pointer;
-
-    transition: 0.25s ease;
+    white-space: nowrap;
+    transition: all 0.3s ease;
 }
 
 
@@ -16383,4 +16355,50 @@ html.light-mode .shop-now-btn,
 html.light-mode .continue-shopping-btn,
 html.light-mode .nav-signup {
     color: #ffffff !important;
+}
+.footer-newsletter-form {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 10px !important;
+    width: 100% !important;
+    max-width: 500px !important;
+    margin-top: 20px;
+}
+
+.footer-newsletter-form input[type="email"] {
+    display: block !important;
+    flex: 1 1 auto !important;
+    width: 0 !important;
+    min-width: 0 !important;
+    height: 48px !important;
+    box-sizing: border-box !important;
+    padding: 0 15px !important;
+    background: #111827 !important;
+    color: white !important;
+    border: 1px solid #374151 !important;
+    border-radius: 6px !important;
+    font-size: 14px !important;
+    outline: none !important;
+}
+
+.footer-newsletter-form button {
+    display: block !important;
+    flex: 0 0 125px !important;
+    width: 125px !important;
+    height: 48px !important;
+    box-sizing: border-box !important;
+    padding: 0 10px !important;
+    background: #2563eb !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 6px !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    letter-spacing: 1px !important;
+    cursor: pointer !important;
+}
+
+.footer-newsletter-form button:hover {
+    background: #1d4ed8 !important;
 }
